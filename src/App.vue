@@ -1,5 +1,7 @@
 <template>
   <div class="mainview">
+    <RouterLink to="/vorfreuden">Vorfreuden</RouterLink> |
+    <RouterLink to="/dankbarkeiten">Dankbarkeiten</RouterLink>
     <RouterView />
   </div>
 </template>
