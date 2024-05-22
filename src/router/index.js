@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import DankView from '../views/DankTimeLineView.vue'
-import FreudeView from '../views/FreudeTimeLineView.vue'
+import DankTimeLineView from '../views/DankTimeLineView.vue'
+import FreudeTimeLineView from '../views/FreudeTimeLineView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,14 +12,14 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/dankbarkeiten',
+      path: '/danktimeline',
       name: 'dank',
-      component: DankView
+      component: DankTimeLineView
     },
     {
-      path: '/vorfreuden',
+      path: '/freudetimeline',
       name: 'fruede',
-      component: FreudeView
+      component: FreudeTimeLineView
     }
   ]
 })

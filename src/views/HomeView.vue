@@ -1,7 +1,7 @@
 <template>
   <header>
-    <button>Dankbarkeiten</button>
-    <button>Vorfreuden</button>
+    <button @click="$router.push('/danktimeline')">Dankbarkeiten</button>
+    <button @click="$router.push('/freudetimeline')">Vorfreuden</button>
     <button>Gewohnheiten</button>
   </header>
   <main>
