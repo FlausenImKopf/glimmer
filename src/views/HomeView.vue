@@ -1,8 +1,14 @@
 <template>
   <header>
-    <button @click="$router.push('/danktimeline')">Dankbarkeiten</button>
-    <button @click="$router.push('/freudetimeline')">Vorfreuden</button>
-    <button>Gewohnheiten</button>
+    <div class="input-view-links">
+      <RouterLink to="/vorfreuden">Vorfreuden</RouterLink> |
+      <RouterLink to="/dankbarkeiten">Dankbarkeiten</RouterLink>
+    </div>
+    <div class="timeline-view-links">
+      <button @click="$router.push('/danktimeline')">Dankbarkeiten</button>
+      <button @click="$router.push('/freudetimeline')">Vorfreuden</button>
+      <button>Gewohnheiten</button>
+    </div>
   </header>
   <main>
     <span class="vorfreude-label">heute freue ich mich auf</span><br />
@@ -13,9 +19,8 @@
 <script></script>
 
 <style scoped>
-header {
+.timeline-view-links {
   display: flex;
-  min-height: 4rem;
 }
 main {
   padding: 1rem;
