@@ -1,7 +1,8 @@
 <template>
   <div class="mainview">
-    <RouterLink to="/vorfreuden">Vorfreuden</RouterLink> |
-    <RouterLink to="/dankbarkeiten">Dankbarkeiten</RouterLink>
+    <header>
+      <h1 class="headline">Glimmer</h1>
+    </header>
     <RouterView />
   </div>
 </template>
@@ -18,5 +19,13 @@ html {
   background-color: darkblue;
   border-radius: 2rem;
   padding: 1rem;
+}
+.headline {
+  color: #e7e7e0;
+  text-shadow: 0 0 15px #8d6d29;
+  align-items: center;
+  text-align: center;
+  border-bottom: 2px white solid;
+  padding-bottom: 1.5rem;
 }
 </style>
