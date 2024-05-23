@@ -1,7 +1,7 @@
 <template>
   <form id="add-anticipation">
-    <input type="text" :placeholder="placeholderText" />
-    <button>speichern</button>
+    <input type="text" :placeholder="placeholderText" v-model="newNote" />
+    <button @click.prevent="handleNewNote">speichern</button>
   </form>
   <ul>
     <li>
@@ -19,6 +19,23 @@
 <!-- hier mit props die Texte erwarten lassen. -->
 <script>
 export default {
+  data() {
+    return {
+      notes: [
+        {
+          id: 1,
+          description: 'Ich bin dankbar für die Zusammenarbeit mit Regina',
+          tags: ['work buddies']
+        },
+        {
+          id: 2,
+          description: 'Ich bin dankbar für den Sonnenschein heute',
+          tags: ['sunshine']
+        }
+      ],
+      newNote: ''
+    }
+  },
   props: {
     exampleCheckboxText: {
       type: String,
@@ -31,6 +48,22 @@ export default {
     placeholderText: {
       type: String
     }
+  },
+  methods: {
+    handleNewNote() {
+      if (this.newNote.length === 0) {
+        return
+      } else {
+        const newNote = {
+          description: this.newNote,
+          id: Math.floor(Math.random() * 543),
+          tags: []
+        }
+        this.notes.push(newNote)
+        this.newNote = ''
+        console.log(this.notes)
+      }
+    }
   }
 }
 </script>
@@ -40,3 +73,6 @@ ul {
   list-style: none;
 }
 </style>
+
+if (data.length === 0) return const newTodo = { description: data, id: Math.floor(Math.random() *
+1000), done: false } this.todos.push(newTodo)
