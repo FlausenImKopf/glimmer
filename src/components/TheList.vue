@@ -1,15 +1,17 @@
 <template>
-  <form id="add-anticipation">
-    <input type="text" :placeholder="placeholderText" v-model="newNote" />
-    <button @click.prevent="handleNewNote">speichern</button>
-  </form>
   <ul>
-    <li>
+    <li v-for="(note, id) in notes" :key="id">
       <form>
-        <label :for="singleNote">
-          <input :id="singleNote" type="checkbox" :name="singleNote" />
-          <span>{{ exampleCheckboxText }}</span>
-          <button>teilen</button>
+        <label :for="'ID_' + note.id">
+          <textarea
+            v-model="note.description"
+            :placeholder="placeholderText"
+            :id="'ID_' + note.id"
+            :name="singleNote"
+            ref="textarea"
+            @input="resize($event)"
+          ></textarea>
+          <button @click.prevent="handleNewNote">speichern</button>
         </label>
       </form>
     </li>
@@ -24,7 +26,8 @@ export default {
       notes: [
         {
           id: 1,
-          description: 'Ich bin dankbar für die Zusammenarbeit mit Regina',
+          description:
+            'Ich bin dankbar für die Zusammenarbeit mit Regina und freue mich schon total auf die Präsentation unserer App',
           tags: ['work buddies']
         },
         {
@@ -37,10 +40,6 @@ export default {
     }
   },
   props: {
-    exampleCheckboxText: {
-      type: String,
-      required: true
-    },
     singleNote: {
       type: String,
       required: true
@@ -51,28 +50,64 @@ export default {
   },
   methods: {
     handleNewNote() {
-      if (this.newNote.length === 0) {
-        return
-      } else {
-        const newNote = {
-          description: this.newNote,
-          id: Math.floor(Math.random() * 543),
-          tags: []
-        }
-        this.notes.push(newNote)
-        this.newNote = ''
-        console.log(this.notes)
-      }
+      // if (this.newDescription.length === 0) {
+      //   return
+      // } else {
+      //   const newNote = {
+      //     description: this.newNote,
+      //     id: Math.floor(Math.random() * 543),
+      //     tags: []
+      //   }
+      //   this.notes.push(newNote)
+      //   this.newNote = ''
+      //   console.log(this.notes)
+      // }
+    },
+    resize(event) {
+      const element = event.target
+      element.style.height = 'auto'
+      element.style.height = element.scrollHeight + 'px'
     }
+  },
+  mounted() {
+    this.notes.forEach((note, index) => {
+      this.resize({ target: this.$refs.textarea[index] })
+    })
   }
 }
 </script>
 
 <style scoped>
 ul {
-  list-style: none;
+  color: white;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+li {
+  position: relative;
+  padding-left: 1.5em;
+  margin-bottom: 1em;
+}
+
+li::before {
+  content: '*';
+  counter-increment: item;
+  position: absolute;
+  left: 0;
+  top: 0.3em;
+}
+
+textarea {
+  background-color: darkblue;
+  color: white;
+  width: 200px;
+  min-height: 10px;
+  padding: 2px;
+  resize: none;
+  overflow: hidden;
+  background-color: transparent;
+  border: none;
+  border-radius: 4px;
 }
 </style>
-
-if (data.length === 0) return const newTodo = { description: data, id: Math.floor(Math.random() *
-1000), done: false } this.todos.push(newTodo)
