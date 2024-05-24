@@ -11,7 +11,21 @@
             ref="textarea"
             @input="resize($event)"
           ></textarea>
-          <button @click.prevent="handleNewNote">speichern</button>
+          <!-- <button >speichern</button> -->
+        </label>
+      </form>
+    </li>
+    <!-- Additional empty textarea for new gratitude -->
+    <li>
+      <form>
+        <label>
+          <textarea
+            v-model="text"
+            placeholder="Add a new gratitude..."
+            ref="textareaAdd"
+            @input="resize($event)"
+          ></textarea>
+          <button @click.prevent="handleNewGratitude()">speichern</button>
         </label>
       </form>
     </li>
@@ -23,6 +37,11 @@ import { mapStores } from 'pinia'
 import { useGratitudesStore } from '../stores/gratitudes'
 
 export default {
+  data() {
+    return {
+      text: ''
+    }
+  },
   props: {
     singleNote: {
       type: String,
@@ -36,19 +55,13 @@ export default {
     ...mapStores(useGratitudesStore)
   },
   methods: {
-    handleNewNote() {
-      // if (this.newDescription.length === 0) {
-      //   return
-      // } else {
-      //   const newNote = {
-      //     description: this.newNote,
-      //     id: Math.floor(Math.random() * 543),
-      //     tags: []
-      //   }
-      //   this.notes.push(newNote)
-      //   this.newNote = ''
-      //   console.log(this.notes)
-      // }
+    handleNewGratitude() {
+      if (this.text.length === 0) {
+        return
+      } else {
+        this.gratitudesStore.addGratitude(this.text)
+        this.text = ''
+      }
     },
     resize(event) {
       const element = event.target
@@ -57,6 +70,11 @@ export default {
     }
   },
   mounted() {
+    this.$refs.textarea.forEach((textarea) => {
+      this.resize({ target: textarea })
+    })
+  },
+  updated() {
     this.$refs.textarea.forEach((textarea) => {
       this.resize({ target: textarea })
     })
