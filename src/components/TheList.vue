@@ -1,12 +1,12 @@
 <template>
   <ul>
-    <li v-for="(note, id) in notes" :key="id">
+    <li v-for="gratitude in gratitudesStore.gratitudes" :key="gratitude.id">
       <form>
-        <label :for="'ID_' + note.id">
+        <label :for="'ID_' + gratitude.id">
           <textarea
-            v-model="note.description"
+            :value="gratitude.text"
             :placeholder="placeholderText"
-            :id="'ID_' + note.id"
+            :id="'ID_' + gratitude.id"
             :name="singleNote"
             ref="textarea"
             @input="resize($event)"
@@ -18,27 +18,11 @@
   </ul>
 </template>
 
-<!-- hier mit props die Texte erwarten lassen. -->
 <script>
+import { mapStores } from 'pinia'
+import { useGratitudesStore } from '../stores/gratitudes'
+
 export default {
-  data() {
-    return {
-      notes: [
-        {
-          id: 1,
-          description:
-            'Ich bin dankbar für die Zusammenarbeit mit Regina und freue mich schon total auf die Präsentation unserer App',
-          tags: ['work buddies']
-        },
-        {
-          id: 2,
-          description: 'Ich bin dankbar für den Sonnenschein heute',
-          tags: ['sunshine']
-        }
-      ],
-      newNote: ''
-    }
-  },
   props: {
     singleNote: {
       type: String,
@@ -47,6 +31,9 @@ export default {
     placeholderText: {
       type: String
     }
+  },
+  computed: {
+    ...mapStores(useGratitudesStore)
   },
   methods: {
     handleNewNote() {
@@ -70,8 +57,8 @@ export default {
     }
   },
   mounted() {
-    this.notes.forEach((note, index) => {
-      this.resize({ target: this.$refs.textarea[index] })
+    this.$refs.textarea.forEach((textarea) => {
+      this.resize({ target: textarea })
     })
   }
 }
