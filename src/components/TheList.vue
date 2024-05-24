@@ -9,7 +9,7 @@
             :id="'ID_' + gratitude.id"
             :name="singleNote"
             ref="textarea"
-            @input="resize($event)"
+            @input="(event) => handleEditingGratitude(gratitude.id, event.target.value)"
           ></textarea>
           <!-- <button >speichern</button> -->
         </label>
@@ -62,6 +62,11 @@ export default {
         this.gratitudesStore.addGratitude(this.text)
         this.text = ''
       }
+    },
+    handleEditingGratitude(id, text) {
+      console.log('id :' + id)
+      console.log('text: ' + text)
+      this.gratitudesStore.editGratitude(id, text)
     },
     resize(event) {
       const element = event.target

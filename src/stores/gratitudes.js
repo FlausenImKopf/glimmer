@@ -1,7 +1,6 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { v4 as uuidv4 } from 'uuid'
-uuidv4() // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
 
 export const useGratitudesStore = defineStore('gratitudes', {
   state: () => ({
@@ -24,9 +23,15 @@ export const useGratitudesStore = defineStore('gratitudes', {
       }
     ]
   }),
+  persist: true,
   actions: {
     addGratitude(text) {
       this.gratitudes.push({ text, id: uuidv4(), createdAt: new Date() })
+    },
+    editGratitude(id, text) {
+      const toBeEdited = this.gratitudes.find((gratitude) => gratitude.id === id)
+      toBeEdited.text = text
+      console.log(toBeEdited)
     }
   }
 })
