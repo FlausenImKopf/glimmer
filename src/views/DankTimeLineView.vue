@@ -1,5 +1,8 @@
 <template>
   <article class="danklist">
+    <div class="calendar">
+      <VCalendar borderless @dayclick="click()" />
+    </div>
     <h2>Dankbarkeiten</h2>
     <section class="list">
       <section v-for="(dankbarkeitenEinesTages, datum) in getDankbarkeiten()" :key="datum">
@@ -50,18 +53,12 @@ export default {
           datum: new Date(2024, 4, 22, 11, 58)
         }
       ]
-      // dankbarkeitenMitDatum: {
-      //   '1.1.24': [
-      //     {
-      //       id: 4,
-      //       message: 'ich bin dankbar für das angenehme Gespräch',
-      //       datum: new Date(2024, 4, 23, 11, 58)
-      //     }
-      //   ]
-      // }
     }
   },
   methods: {
+    click() {
+      console.log('juhuhu')
+    },
     getDankbarkeiten() {
       return this.splitSortedDankbarkeiten(this.sortDankbarkeitenForDate(this.dankbarkeiten))
     },
@@ -99,9 +96,16 @@ h2 {
   color: Cornflowerblue;
   padding-top: none;
   padding-bottom: none;
+  position: relative;
 }
 .list {
   border-left: 2px Cornflowerblue solid;
+}
+.calendar {
+  position: absolute;
+  top: 80px;
+  left: 19px;
+  z-index: 1;
 }
 .datum {
   color: white;
