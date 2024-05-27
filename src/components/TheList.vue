@@ -9,23 +9,23 @@
             :id="'ID_' + gratitude.id"
             :name="singleNote"
             ref="textarea"
-            @input="resize($event)"
+            @input="(event) => handleEditingGratitude(gratitude.id, event.target.value)"
           ></textarea>
           <!-- <button >speichern</button> -->
         </label>
       </form>
     </li>
-    <!-- Additional empty textarea for new gratitude -->
+    <!-- Empty textarea for new gratitude -->
     <li>
       <form>
         <label>
           <textarea
             v-model="text"
             placeholder="Add a new gratitude..."
-            ref="textareaAdd"
             @input="resize($event)"
+            @keydown.enter.exact.prevent="handleNewGratitude()"
+            @blur="handleNewGratitude()"
           ></textarea>
-          <button @click.prevent="handleNewGratitude()">speichern</button>
         </label>
       </form>
     </li>
@@ -63,6 +63,11 @@ export default {
         this.text = ''
       }
     },
+    handleEditingGratitude(id, text) {
+      console.log('id :' + id)
+      console.log('text: ' + text)
+      this.gratitudesStore.editGratitude(id, text)
+    },
     resize(event) {
       const element = event.target
       element.style.height = 'auto'
@@ -70,13 +75,17 @@ export default {
     }
   },
   mounted() {
-    this.$refs.textarea.forEach((textarea) => {
-      this.resize({ target: textarea })
+    this.$nextTick(() => {
+      this.$refs.textarea.forEach((textarea) => {
+        this.resize({ target: textarea })
+      })
     })
   },
   updated() {
-    this.$refs.textarea.forEach((textarea) => {
-      this.resize({ target: textarea })
+    this.$nextTick(() => {
+      this.$refs.textarea.forEach((textarea) => {
+        this.resize({ target: textarea })
+      })
     })
   }
 }
