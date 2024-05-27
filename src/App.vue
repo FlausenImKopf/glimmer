@@ -16,6 +16,7 @@ html {
 .mainview {
   min-height: 100vh;
   max-width: 20rem;
+  min-width: 20rem;
   background-color: darkblue;
   border-radius: 2rem;
   padding: 1rem;
