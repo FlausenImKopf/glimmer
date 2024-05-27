@@ -1,6 +1,6 @@
 <template>
   <ul>
-    <li v-for="gratitude in gratitudesStore.gratitudes" :key="gratitude.id">
+    <li v-for="gratitude in gratitudesToday" :key="gratitude.id">
       <form>
         <label :for="'ID_' + gratitude.id">
           <textarea
@@ -12,7 +12,6 @@
             @input="(event) => handleEditingGratitude(gratitude.id, event.target.value)"
             @blur="handleDeletingGratitude(gratitude.id, gratitude.text)"
           ></textarea>
-          <!-- <button >speichern</button> -->
         </label>
       </form>
     </li>
@@ -53,7 +52,18 @@ export default {
     }
   },
   computed: {
-    ...mapStores(useGratitudesStore)
+    ...mapStores(useGratitudesStore),
+    gratitudesToday: function () {
+      return this.gratitudesStore.gratitudes.filter((gratitude) => {
+        const createdAt = new Date(gratitude.createdAt)
+        const rightNow = new Date()
+        return (
+          createdAt.getDate() === rightNow.getDate() &&
+          createdAt.getMonth() === rightNow.getMonth() &&
+          createdAt.getFullYear() === rightNow.getFullYear()
+        )
+      })
+    }
   },
   methods: {
     handleNewGratitude() {
