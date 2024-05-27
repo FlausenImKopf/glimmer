@@ -31,10 +31,10 @@ export const useGratitudesStore = defineStore('gratitudes', {
     editGratitude(id, text) {
       const toBeEdited = this.gratitudes.find((gratitude) => gratitude.id === id)
       toBeEdited.text = text
-      console.log(toBeEdited)
     },
     deleteGratitude(id) {
-      const toBeDeleted = this.gratitude.find((gratitude) => gratitude.id === id)
+      const toBeDeleted = this.gratitudes.indexOf((gratitude) => gratitude.id === id)
+      this.gratitudes.splice(toBeDeleted, 1)
     }
   }
 })

@@ -10,6 +10,7 @@
             :name="singleNote"
             ref="textarea"
             @input="(event) => handleEditingGratitude(gratitude.id, event.target.value)"
+            @blur="handleDeletingGratitude(gratitude.id, gratitude.text)"
           ></textarea>
           <!-- <button >speichern</button> -->
         </label>
@@ -21,7 +22,7 @@
         <label>
           <textarea
             v-model="text"
-            placeholder="Add a new gratitude..."
+            placeholder="Heute bin ich dankbar für..."
             @input="resize($event)"
             @keydown.enter.exact.prevent="handleNewGratitude()"
             @blur="handleNewGratitude()"
@@ -64,9 +65,15 @@ export default {
       }
     },
     handleEditingGratitude(id, text) {
-      console.log('id :' + id)
-      console.log('text: ' + text)
       this.gratitudesStore.editGratitude(id, text)
+    },
+    handleDeletingGratitude(id, text) {
+      const store = this.gratitudesStore
+      if (text === '') {
+        store.deleteGratitude(id)
+      } else {
+        return
+      }
     },
     resize(event) {
       const element = event.target
