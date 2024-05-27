@@ -93,16 +93,26 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      this.$refs.textarea.forEach((textarea) => {
+      const textarea = this.$refs.textarea
+      if (Array.isArray(textarea)) {
+        textarea.forEach((textarea) => {
+          this.resize({ target: textarea })
+        })
+      } else {
         this.resize({ target: textarea })
-      })
+      }
     })
   },
   updated() {
     this.$nextTick(() => {
-      this.$refs.textarea.forEach((textarea) => {
+      const textarea = this.$refs.textarea
+      if (Array.isArray(textarea)) {
+        textarea.forEach((textarea) => {
+          this.resize({ target: textarea })
+        })
+      } else {
         this.resize({ target: textarea })
-      })
+      }
     })
   }
 }
