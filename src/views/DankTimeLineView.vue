@@ -59,41 +59,52 @@
 
 <script>
 import DankListRow from '../components/TimeLineRow.vue'
+import { mapStores } from 'pinia'
+import { useGratitudesStore } from '../stores/gratitudes'
 export default {
   components: {
     DankListRow
   },
+  computed: {
+    ...mapStores(useGratitudesStore)
+  },
+
+  created() {
+    this.dankbarkeiten = Object.values(this.gratitudesStore.gratitudes)
+  },
+
   data() {
     return {
       isVisibleCalendar: false,
       selectedDate: null,
-      dankbarkeiten: [
-        {
-          id: 1,
-          message: 'ich bin dankbar für das schoene Wetter draussen',
-          datum: new Date(2024, 4, 23, 12, 58)
-        },
-        {
-          id: 2,
-          message: 'ich bin dankbar dafür, dass Ibrahim uns hilft',
-          datum: new Date(2024, 4, 23, 10, 58)
-        },
-        {
-          id: 3,
-          message: 'ich bin Johanna dankbar für die Zusammenarbeit',
-          datum: new Date(2024, 4, 22, 12, 58)
-        },
-        {
-          id: 4,
-          message: 'ich bin dankbar für das angenehme Gespräch',
-          datum: new Date(2024, 4, 23, 11, 58)
-        },
-        {
-          id: 5,
-          message: 'ich bin dankbar dafür, dass mein Mann heute den Einkauf erledigt hat',
-          datum: new Date(2024, 4, 22, 11, 58)
-        }
-      ]
+      dankbarkeiten: {} //Object.values(this.gratitudesStore.gratitudes)
+      // dankbarkeiten: [
+      //   {
+      //     id: 1,
+      //     message: 'ich bin dankbar für das schoene Wetter draussen',
+      //     datum: new Date(2024, 4, 23, 12, 58)
+      //   },
+      //   {
+      //     id: 2,
+      //     message: 'ich bin dankbar dafür, dass Ibrahim uns hilft',
+      //     datum: new Date(2024, 4, 23, 10, 58)
+      //   },
+      //   {
+      //     id: 3,
+      //     message: 'ich bin Johanna dankbar für die Zusammenarbeit',
+      //     datum: new Date(2024, 4, 22, 12, 58)
+      //   },
+      //   {
+      //     id: 4,
+      //     message: 'ich bin dankbar für das angenehme Gespräch',
+      //     datum: new Date(2024, 4, 23, 11, 58)
+      //   },
+      //   {
+      //     id: 5,
+      //     message: 'ich bin dankbar dafür, dass mein Mann heute den Einkauf erledigt hat',
+      //     datum: new Date(2024, 4, 22, 11, 58)
+      //   }
+      // ]
     }
   },
   methods: {
@@ -106,7 +117,13 @@ export default {
     },
 
     getDankbarkeiten() {
-      let danks = this.splitSortedDankbarkeiten(this.sortDankbarkeitenForDate(this.dankbarkeiten))
+      //1. Schritt - nach Datum sortieren. Hier ist danks ein Array
+      let danks = Object.values(this.dankbarkeiten).sort(
+        (dank1, dank2) => Date.parse(dank2.createdAt) - Date.parse(dank1.createdAt)
+      )
+      //2. Schritt - Dankbarkeiten nach Datum gruppieren und mit Datum als Key im Objekt speichern. Hier wird danks zum Object
+      danks = this.splitSortedDankbarkeiten(danks)
+      //3. Schritt - entweder Einen Tag mit dazugehörigen Dankbarkeiten herausgeben, oder alle.
       if (this.selectedDate != null) {
         let result = {}
         result[this.getDateWithoutTime(this.selectedDate)] =
@@ -115,26 +132,25 @@ export default {
       }
       return danks
     },
-    sortDankbarkeitenForDate() {
-      return this.dankbarkeiten.sort(
-        (dank1, dank2) => dank2.datum.getTime() - dank1.datum.getTime()
-      )
-    },
-    splitSortedDankbarkeiten(dankbarkeiten) {
-      let result = {}
-      result[this.getDateWithoutTime(this.dankbarkeiten[0].datum)] = [dankbarkeiten[0]]
 
-      for (let i = 1; i < dankbarkeiten.length; i++) {
-        let dateWithoutTime = this.getDateWithoutTime(this.dankbarkeiten[i].datum)
+    splitSortedDankbarkeiten(danks) {
+      let result = {}
+      result[this.getDateWithoutTime(this.dankbarkeiten[0].createdAt)] = [danks[0]]
+
+      for (let i = 1; i < danks.length; i++) {
+        let dateWithoutTime = this.getDateWithoutTime(
+          Object.values(this.dankbarkeiten)[i].createdAt
+        )
         if (Object.keys(result).includes(dateWithoutTime)) {
-          result[dateWithoutTime].push(dankbarkeiten[i])
+          result[dateWithoutTime].push(danks[i])
         } else {
-          result[dateWithoutTime] = [dankbarkeiten[i]]
+          result[dateWithoutTime] = [danks[i]]
         }
       }
       return result
     },
-    getDateWithoutTime(date) {
+    getDateWithoutTime(dateString) {
+      let date = new Date(dateString)
       return date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear()
     }
   }
