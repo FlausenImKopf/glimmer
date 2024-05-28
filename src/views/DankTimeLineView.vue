@@ -198,4 +198,15 @@ h2 {
   color: white;
   padding-left: 1rem;
 }
+
+.datum::before {
+  content: ' ';
+  position: absolute;
+  left: -0.3rem;
+
+  width: 0.8rem;
+  height: 0.8rem;
+  background-color: Cornflowerblue;
+  border-radius: 50%;
+}
 </style>
