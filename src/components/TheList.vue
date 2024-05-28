@@ -1,7 +1,11 @@
 <template>
+  <!-- List of gratitude: today's gratitudes -->
   <ul>
     <li v-for="gratitude in gratitudesToday" :key="gratitude.id">
-      <form>
+      <form
+        :id="'one-of-todays-gratitudes-with-ID :' + gratitude.id"
+        :name="'one-of-todays-gratitudes-with-ID :' + gratitude.id"
+      >
         <label :for="'ID_' + gratitude.id">
           <textarea
             :value="gratitude.text"
@@ -15,9 +19,9 @@
         </label>
       </form>
     </li>
-    <!-- Empty textarea for new gratitude -->
+    <!-- Empty textarea for new gratitude: always displayed below the last entry -->
     <li>
-      <form>
+      <form id="add-new-gratitude-for-today-here" name="add-new-gratitude-for-today-here">
         <label>
           <textarea
             v-model="text"
