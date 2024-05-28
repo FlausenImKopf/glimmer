@@ -1,5 +1,5 @@
 <template>
-  <p>{{ note.message }}</p>
+  <p>{{ note.text }}</p>
 </template>
 
 <script>
