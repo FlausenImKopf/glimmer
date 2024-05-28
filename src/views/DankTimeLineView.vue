@@ -59,25 +59,26 @@
 
 <script>
 import DankListRow from '../components/TimeLineRow.vue'
-import { mapStores } from 'pinia'
 import { useGratitudesStore } from '../stores/gratitudes'
 export default {
   components: {
     DankListRow
   },
-  computed: {
-    ...mapStores(useGratitudesStore)
-  },
 
   created() {
-    this.dankbarkeiten = Object.values(this.gratitudesStore.gratitudes)
+    useGratitudesStore().getGratitudes()
+  },
+  computed: {
+    dankbarkeiten() {
+      return useGratitudesStore().gratitudes
+    }
   },
 
   data() {
     return {
       isVisibleCalendar: false,
-      selectedDate: null,
-      dankbarkeiten: {} //Object.values(this.gratitudesStore.gratitudes)
+      selectedDate: null
+      // dankbarkeiten: {} //Object.values(this.gratitudesStore.gratitudes)
       // dankbarkeiten: [
       //   {
       //     id: 1,
