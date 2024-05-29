@@ -87,8 +87,8 @@
 <style scoped>
 .headline {
   font-size: x-large;
-  color: white;
-  text-shadow: 0 0 15px #ffbd59;
+  color: #ff5757;
+  text-shadow: 0 0 15px #5ce1e6;
   align-items: center;
   text-align: center;
 }
@@ -96,7 +96,7 @@
 .timeline-view-links {
   display: flex;
   justify-content: space-between;
-  border-bottom: 2px solid white;
+  /* border-bottom: 2px solid white; */
   margin-bottom: none;
 }
 

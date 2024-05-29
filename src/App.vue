@@ -15,7 +15,7 @@ html {
   min-height: 100vh;
   max-width: 20rem;
   min-width: 20rem;
-  background-color: #000b32;
+  background-color: darkblue;
   border-radius: 2rem;
   padding: 1rem;
 }
