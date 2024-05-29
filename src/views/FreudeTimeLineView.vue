@@ -11,7 +11,7 @@
         v-for="freude in vorfreuden"
         :key="freude.id"
         :vorfreude="freude"
-        :datum="currentDate"
+        :currentDate="currentDate"
       />
     </section>
   </article>
@@ -27,16 +27,86 @@ export default {
     return {
       currentDate: new Date(2024, 4, 24, 0, 0),
       vorfreuden: [
+        //Eintagsfreuden
         {
           id: 1,
           message: 'ich freue mich auf das Wochenende!',
-          datum: new Date(2024, 4, 22, 12, 58),
-          enddatum: new Date(2024, 4, 24, 0, 0)
+          createdAt: new Date(2024, 4, 23, 12, 58),
+          enddatum: new Date(2024, 4, 23, 0, 0)
         },
         {
           id: 2,
           message: 'ich freue mich auf den Urlaub!',
-          datum: new Date(2024, 4, 22, 12, 58),
+          createdAt: new Date(2024, 4, 24, 12, 58),
+          enddatum: new Date(2024, 4, 24, 0, 0)
+        },
+        {
+          id: 3,
+          message: 'ich freue mich auf den Urlaub!',
+          createdAt: new Date(2024, 4, 25, 12, 58),
+          enddatum: new Date(2024, 4, 25, 0, 0)
+        },
+        //Zweitagsfreuden
+        {
+          id: 4,
+          message: 'ich freue mich auf den Urlaub!',
+          createdAt: new Date(2024, 4, 23, 12, 58),
+          enddatum: new Date(2024, 4, 24, 0, 0)
+        },
+        {
+          id: 5,
+          message: 'ich freue mich auf den Urlaub!',
+          createdAt: new Date(2024, 4, 24, 12, 58),
+          enddatum: new Date(2024, 4, 25, 0, 0)
+        },
+        //Dreitagsfreuden
+        {
+          id: 6,
+          message: 'ich freue mich auf den Urlaub!',
+          createdAt: new Date(2024, 4, 23, 12, 58),
+          enddatum: new Date(2024, 4, 25, 0, 0)
+        },
+        //Mehrtagsfreuden
+        {
+          id: 7,
+          message: 'ich freue mich auf den Urlaub!',
+          createdAt: new Date(2024, 4, 20, 12, 58),
+          enddatum: new Date(2024, 4, 23, 0, 0)
+        },
+        {
+          id: 8,
+          message: 'ich freue mich auf den Urlaub!',
+          createdAt: new Date(2024, 4, 20, 12, 58),
+          enddatum: new Date(2024, 4, 24, 0, 0)
+        },
+        {
+          id: 9,
+          message: 'ich freue mich auf den Urlaub!',
+          createdAt: new Date(2024, 4, 20, 12, 58),
+          enddatum: new Date(2024, 4, 25, 0, 0)
+        },
+        {
+          id: 10,
+          message: 'ich freue mich auf den Urlaub!',
+          createdAt: new Date(2024, 4, 23, 12, 58),
+          enddatum: new Date(2024, 4, 28, 0, 0)
+        },
+        {
+          id: 11,
+          message: 'ich freue mich auf den Urlaub!',
+          createdAt: new Date(2024, 4, 24, 12, 58),
+          enddatum: new Date(2024, 4, 28, 0, 0)
+        },
+        {
+          id: 12,
+          message: 'ich freue mich auf den Urlaub!',
+          createdAt: new Date(2024, 4, 25, 12, 58),
+          enddatum: new Date(2024, 4, 28, 0, 0)
+        },
+        {
+          id: 13,
+          message: 'ich freue mich auf den Urlaub!',
+          createdAt: new Date(2024, 4, 20, 12, 58),
           enddatum: new Date(2024, 4, 28, 0, 0)
         }
       ]
