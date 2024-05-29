@@ -2,9 +2,15 @@
   <article class="vorfreuden">
     <h2 class="overview">Vorfreuden</h2>
     <section class="horizontal-list">
-      <p>{{ '23.05.2024' }}</p>
-      <p>{{ '24.05.2024' }}</p>
-      <p>{{ '25.05.2024' }}</p>
+      <div class="data-container">
+        <p class="data">{{ '23.05.2024' }}</p>
+      </div>
+      <div class="data-container">
+        <p class="data">{{ '24.05.2024' }}</p>
+      </div>
+      <div class="data-container">
+        <p class="data">{{ '25.05.2024' }}</p>
+      </div>
     </section>
     <section class="list">
       <FreudListRow
@@ -128,5 +134,18 @@ export default {
   padding-bottom: 0.7rem;
   display: flex;
   justify-content: space-between;
+}
+.data-container {
+  position: relative;
+}
+.data::before {
+  content: ' ';
+  position: absolute;
+  bottom: -18px;
+  left: 30px;
+  width: 0.8rem;
+  height: 0.8rem;
+  background-color: hotpink;
+  border-radius: 50%;
 }
 </style>
