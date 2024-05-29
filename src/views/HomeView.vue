@@ -1,10 +1,9 @@
 <template>
   <header>
-    <div class="timeline-view-links">
+    <!-- <nav class="timeline-view-links">
       <button @click="$router.push('/danktimeline')">Dankbarkeiten</button>
       <button @click="$router.push('/freudetimeline')">Vorfreuden</button>
-      <button>Gewohnheiten</button>
-    </div>
+    </nav> -->
   </header>
   <main>
     <!-- List of today's gratitudes -->
@@ -92,9 +91,6 @@ export default {
 .timeline-view-links {
   display: flex;
 }
-main {
-  border-left: 2px Cornflowerblue solid;
-}
 
 ul {
   color: white;
@@ -106,28 +102,23 @@ li {
   position: relative;
   padding-left: 1.5em;
   margin-bottom: 1em;
+  left: 1.75rem;
+  right: 1.75rem;
 }
 
 li::before {
-  /* content: '*';
-  counter-increment: item;
-  position: absolute;
-  left: 0;
-  top: 0.3em; */
   content: ' ';
   position: absolute;
-  left: -0.45rem;
-
+  left: 13.57rem;
+  top: 0.1rem;
   width: 0.8rem;
   height: 0.8rem;
-  background-color: Cornflowerblue;
+  background-color: #5ce1e6;
   border-radius: 50%;
 }
 
 textarea {
-  background-color: darkblue;
   color: white;
-  width: 200px;
   min-height: 10px;
   padding: 2px;
   resize: none;

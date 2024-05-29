@@ -133,14 +133,18 @@ li {
   position: relative;
   padding-left: 1.5em;
   margin-bottom: 1em;
+  margin-right: 2rem;
 }
 
 li::before {
-  content: '*';
-  counter-increment: item;
+  content: ' ';
   position: absolute;
-  left: 0;
-  top: 0.3em;
+  left: 15.57rem;
+  top: 0.1rem;
+  width: 0.8rem;
+  height: 0.8rem;
+  background-color: #5ce1e6;
+  border-radius: 50%;
 }
 
 textarea {

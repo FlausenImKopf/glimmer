@@ -1,8 +1,6 @@
 <template>
   <div class="mainview">
-    <header>
-      <h1 class="headline">Glimmer</h1>
-    </header>
+    <TheHeader />
     <RouterView />
   </div>
 </template>
@@ -17,16 +15,16 @@ html {
   min-height: 100vh;
   max-width: 20rem;
   min-width: 20rem;
-  background-color: darkblue;
+  background-color: #000b32;
   border-radius: 2rem;
   padding: 1rem;
 }
-.headline {
-  color: #e7e7e0;
-  text-shadow: 0 0 15px #8d6d29;
-  align-items: center;
-  text-align: center;
-  border-bottom: 2px white solid;
-  padding-bottom: 1.5rem;
-}
 </style>
+
+<script>
+import TheHeader from './components/TheHeader.vue'
+
+export default {
+  components: { TheHeader }
+}
+</script>
