@@ -75,12 +75,14 @@ export default {
     // Adjusts textarea-sizing when the app is mounted
     this.$nextTick(() => {
       const textarea = this.$refs.textarea
-      if (Array.isArray(textarea)) {
-        textarea.forEach((textarea) => {
+      if (textarea) {
+        if (Array.isArray(textarea)) {
+          textarea.forEach((textarea) => {
+            this.resize({ target: textarea })
+          })
+        } else {
           this.resize({ target: textarea })
-        })
-      } else {
-        this.resize({ target: textarea })
+        }
       }
     })
   }
@@ -109,8 +111,8 @@ li {
 li::before {
   content: ' ';
   position: absolute;
-  left: 13.57rem;
-  top: 0.1rem;
+  left: -0rem;
+  top: 0.2rem;
   width: 0.8rem;
   height: 0.8rem;
   background-color: #5ce1e6;
