@@ -65,15 +65,30 @@ export const useGratitudesStore = defineStore('gratitudes', {
         .catch((error) => {
           console.error('Failed to add gratitude:', error)
         })
+      // this.gratitudes.push({ text, createdAt, userId })
     },
-    // this.gratitudes.push({ text, createdAt, userId })
     editGratitude(id, text) {
       const toBeEdited = this.gratitudes.find((gratitude) => gratitude.id === id)
       toBeEdited.text = text
     },
     deleteGratitude(id) {
-      const toBeDeleted = this.gratitudes.indexOf((gratitude) => gratitude.id === id)
-      this.gratitudes.splice(toBeDeleted, 1)
+      fetch(`http://localhost:3000/gratitudes/${id}`, {
+        method: 'DELETE'
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`)
+          }
+          return response.json()
+        })
+        .then(() => {
+          this.getGratitudes()
+        })
+        .catch((error) => {
+          console.error('Failed to delete gratitude:', error)
+        })
+      // const toBeDeleted = this.gratitudes.indexOf((gratitude) => gratitude.id === id)
+      // this.gratitudes.splice(toBeDeleted, 1)
     }
   }
 })
