@@ -6,19 +6,10 @@ export const useGratitudesStore = defineStore('gratitudes', {
     return {
       gratitudes: [
         {
-          id: uuidv4(),
           text: 'Ich bin dankbar für die Zusammenarbeit mit Regina und freue mich schon total auf die Präsentation unserer App',
-          createdAt: new Date(2024, 4, 23)
-        },
-        {
-          id: uuidv4(),
-          text: 'Ich bin dankbar für den Sonnenschein heute',
-          createdAt: new Date(2024, 4, 22)
-        },
-        {
-          id: uuidv4(),
-          text: 'Ich bin dankbar fürs Frühstücken in der Morgensonne',
-          createdAt: new Date(2024, 4, 23)
+          createdAt: 1717318812058,
+          userId: 'c2dfc86e-53da-4404-8acd-7497853b8496',
+          id: 'f9b794b4-560e-4043-83c7-fbe5f4fed1f3'
         }
       ]
     }
