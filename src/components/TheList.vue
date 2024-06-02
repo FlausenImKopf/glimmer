@@ -15,9 +15,10 @@
                 :id="'ID_' + gratitude.id"
                 :name="singleNote"
                 ref="textarea"
-                @input="(event) => handleEditingGratitude(gratitude.id, event.target.value)"
-                @blur="handleDeletingGratitude(gratitude.id, gratitude.text)"
+                @keydown.enter.exact.prevent="handleChangingGratitude($event, gratitude.id)"
               ></textarea>
+              <!-- TODO: @blur fixen -->
+              <!-- @blur="handleChangingGratitude($event, gratitude.id)" -->
             </label>
           </form>
         </div>
@@ -132,30 +133,41 @@ export default {
         this.text = ''
       }
     },
-    throttle(func, limit) {
-      let inThrottle
-      return function () {
-        const context = this
-        const args = arguments
-        if (!inThrottle) {
-          func.apply(context, args)
-          inThrottle = true
-          setTimeout(() => (inThrottle = false), limit)
-        }
-      }
-    },
-    editGratitude(id, text) {
-      this.gratitudesStore.editGratitude(id, text)
-    },
-    handleEditingGratitude(id, text) {
-      this.throttledEditGratitude(id, text)
-    },
-    handleDeletingGratitude(id, text) {
+    // throttle(func, limit) {
+    //   let inThrottle
+    //   return function () {
+    //     const context = this
+    //     const args = arguments
+    //     if (!inThrottle) {
+    //       func.apply(context, args)
+    //       inThrottle = true
+    //       setTimeout(() => (inThrottle = false), limit)
+    //     }
+    //   }
+    // },
+    // editGratitude(id, text) {
+    //   this.gratitudesStore.editGratitude(id, text)
+    // },
+    // handleEditingGratitude(id, text) {
+    //   this.throttledEditGratitude(id, text)
+    // },
+    // handleDeletingGratitude(id, text) {
+    //   const store = this.gratitudesStore
+    //   if (text === '') {
+    //     store.deleteGratitude(id)
+    //   } else {
+    //     return
+    //   }
+    // },
+    handleChangingGratitude(event, id) {
+      const text = event.target.value
       const store = this.gratitudesStore
-      if (text === '') {
-        store.deleteGratitude(id)
-      } else {
-        return
+      if (this.text.length === 0) {
+        return store.deleteGratitude(id)
+      } else if (this.text.length !== 0) {
+        store.editGratitude(id, text)
+        event.target.blur()
+        console.log('this line below blur was triggered.')
       }
     },
     resize(event) {
@@ -163,9 +175,6 @@ export default {
       element.style.height = 'auto'
       element.style.height = element.scrollHeight + 'px'
     }
-  },
-  created() {
-    this.throttledEditGratitude = this.throttle(this.editGratitude, 1000)
   },
   mounted() {
     // get gratitudes from api
