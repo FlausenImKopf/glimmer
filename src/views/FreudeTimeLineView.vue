@@ -87,14 +87,14 @@ export default {
           id: uuidv4(),
           text: 'ich freue mich auf den Ausflug!',
           createdAt: new Date(2024, 5, 5, 12, 58),
-          date: new Date(2024, 5, 7, 0, 0),
+          date: new Date(2024, 5, 6, 0, 0),
           userId: 1
         },
         {
           id: uuidv4(),
           text: 'ich freue mich auf die Präsentation der App!',
           createdAt: new Date(2024, 5, 1, 12, 58),
-          date: new Date(2024, 5, 3, 0, 0),
+          date: new Date(2024, 5, 2, 0, 0),
           userId: 1
         },
         //Dreitagsfreuden
@@ -123,7 +123,7 @@ export default {
         {
           id: uuidv4(),
           text: 'ich freue mich auf den Besuch!',
-          createdAt: new Date(2024, 4, 20, 12, 58),
+          createdAt: new Date(2024, 4, 21, 12, 58),
           date: new Date(2024, 4, 31, 0, 0),
           userId: 1
         },
