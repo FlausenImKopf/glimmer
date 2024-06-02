@@ -1,5 +1,7 @@
 <template>
-  <p>{{ note.text }}</p>
+  <div class="wrapper">
+    <p class="message">{{ note.text }}</p>
+  </div>
 </template>
 
 <script>
@@ -11,7 +13,19 @@ export default {
 </script>
 
 <style scoped>
-p {
+.wrapper {
+  _position: relative;
+}
+.message {
   margin: 0;
+}
+.star {
+  width: 2rem;
+}
+.message::after {
+  content: url(../../public/header-star-green.png);
+  position: absolute;
+  transform: scale(0.13);
+  top: -10rem;
 }
 </style>

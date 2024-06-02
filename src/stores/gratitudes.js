@@ -30,7 +30,6 @@ export const useGratitudesStore = defineStore('gratitudes', {
       const data = await response.json()
       this.gratitudes = data
     },
-
     addGratitude(text) {
       this.gratitudes.push({ text, id: uuidv4(), createdAt: new Date() })
     },

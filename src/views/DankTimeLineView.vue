@@ -44,7 +44,11 @@
     </div>
 
     <section class="list">
-      <section v-for="(dankbarkeitenEinesTages, datum) in getDankbarkeiten()" :key="datum">
+      <section
+        v-for="(dankbarkeitenEinesTages, datum) in getDankbarkeiten()"
+        :key="datum"
+        class="section"
+      >
         <label class="datum">{{ datum }}</label>
         <DankListRow
           class="danklist"
@@ -78,34 +82,6 @@ export default {
     return {
       isVisibleCalendar: false,
       selectedDate: null
-      // dankbarkeiten: {} //Object.values(this.gratitudesStore.gratitudes)
-      // dankbarkeiten: [
-      //   {
-      //     id: 1,
-      //     message: 'ich bin dankbar für das schoene Wetter draussen',
-      //     datum: new Date(2024, 4, 23, 12, 58)
-      //   },
-      //   {
-      //     id: 2,
-      //     message: 'ich bin dankbar dafür, dass Ibrahim uns hilft',
-      //     datum: new Date(2024, 4, 23, 10, 58)
-      //   },
-      //   {
-      //     id: 3,
-      //     message: 'ich bin Johanna dankbar für die Zusammenarbeit',
-      //     datum: new Date(2024, 4, 22, 12, 58)
-      //   },
-      //   {
-      //     id: 4,
-      //     message: 'ich bin dankbar für das angenehme Gespräch',
-      //     datum: new Date(2024, 4, 23, 11, 58)
-      //   },
-      //   {
-      //     id: 5,
-      //     message: 'ich bin dankbar dafür, dass mein Mann heute den Einkauf erledigt hat',
-      //     datum: new Date(2024, 4, 22, 11, 58)
-      //   }
-      // ]
     }
   },
   methods: {
@@ -118,12 +94,20 @@ export default {
     },
 
     getDankbarkeiten() {
+      // Vorbereitung: invalide Daten aussortieren
+      let validValues = []
+      for (const value of Object.values(this.dankbarkeiten)) {
+        if (!isNaN(Date.parse(value.createdAt))) {
+          validValues.push(value)
+        }
+      }
       //1. Schritt - nach Datum sortieren. Hier ist danks ein Array
-      let danks = Object.values(this.dankbarkeiten).sort(
+      let danks = validValues.sort(
         (dank1, dank2) => Date.parse(dank2.createdAt) - Date.parse(dank1.createdAt)
       )
       //2. Schritt - Dankbarkeiten nach Datum gruppieren und mit Datum als Key im Objekt speichern. Hier wird danks zum Object
       danks = this.splitSortedDankbarkeiten(danks)
+
       //3. Schritt - entweder Einen Tag mit dazugehörigen Dankbarkeiten herausgeben, oder alle.
       if (this.selectedDate != null) {
         let result = {}
@@ -136,12 +120,10 @@ export default {
 
     splitSortedDankbarkeiten(danks) {
       let result = {}
-      result[this.getDateWithoutTime(this.dankbarkeiten[0].createdAt)] = [danks[0]]
+      result[this.getDateWithoutTime(danks[0].createdAt)] = [danks[0]]
 
       for (let i = 1; i < danks.length; i++) {
-        let dateWithoutTime = this.getDateWithoutTime(
-          Object.values(this.dankbarkeiten)[i].createdAt
-        )
+        let dateWithoutTime = this.getDateWithoutTime(danks[i].createdAt)
         if (Object.keys(result).includes(dateWithoutTime)) {
           result[dateWithoutTime].push(danks[i])
         } else {
@@ -158,14 +140,22 @@ export default {
 }
 </script>
 <style scoped>
+/* antonio-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Antonio';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../../public/antonio-v19-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
 h2 {
+  font-family: 'Antonio';
   padding: 1rem;
   text-align: center;
 }
 .danklist {
-  color: Cornflowerblue;
-  padding-top: none;
-  padding-bottom: none;
+  color: #4f65df;
+  padding: 1rem;
   position: relative;
 }
 .overview {
@@ -174,20 +164,20 @@ h2 {
 }
 .all-view-button {
   background-color: transparent;
-  color: white;
+  color: #81dee4;
   border: none;
   margin: 0;
   padding: 0;
 }
 .calendar-button {
   background-color: transparent;
-  color: white;
+  color: #81dee4;
   border: none;
   margin: 0;
   padding: 0;
 }
 .list {
-  border-left: 2px Cornflowerblue solid;
+  border-left: 2px #4f65df solid;
 }
 .calendar {
   position: absolute;
@@ -195,19 +185,22 @@ h2 {
   left: 19px;
   z-index: 1;
 }
+.section {
+  position: relative;
+}
 .datum {
-  color: white;
+  color: #81dee4;
   padding-left: 1rem;
 }
 
 .datum::before {
   content: ' ';
   position: absolute;
-  left: -0.3rem;
-
+  left: -0.5rem;
+  top: 0.18rem;
   width: 0.8rem;
   height: 0.8rem;
-  background-color: Cornflowerblue;
+  background-color: #4f65df;
   border-radius: 50%;
 }
 </style>
