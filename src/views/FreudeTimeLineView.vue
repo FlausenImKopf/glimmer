@@ -25,6 +25,7 @@
 
 <script>
 import FreudListRow from '../components/FreudListRow.vue'
+import { v4 as uuidv4 } from 'uuid'
 export default {
   components: {
     FreudListRow
@@ -61,85 +62,98 @@ export default {
       vorfreuden: [
         //Eintagsfreuden
         {
-          id: 1,
-          message: 'ich freue mich auf das Wochenende!',
+          id: uuidv4(),
+          text: 'ich freue mich auf die Pause!',
           createdAt: new Date(2024, 4, 23, 12, 58),
-          enddatum: new Date(2024, 4, 23, 0, 0)
+          date: new Date(2024, 4, 23, 0, 0),
+          userId: 1
         },
         {
-          id: 2,
-          message: 'ich freue mich auf den Urlaub!',
+          id: uuidv4(),
+          text: 'ich freue mich auf das Treffen heute Abend!',
           createdAt: new Date(2024, 4, 24, 12, 58),
-          enddatum: new Date(2024, 4, 24, 0, 0)
+          date: new Date(2024, 4, 24, 0, 0),
+          userId: 1
         },
         {
-          id: 3,
-          message: 'ich freue mich auf den Urlaub!',
+          id: uuidv4(),
+          text: 'ich freue mich auf das Abendessen mit der Familie!',
           createdAt: new Date(2024, 4, 25, 12, 58),
-          enddatum: new Date(2024, 4, 25, 0, 0)
+          date: new Date(2024, 4, 25, 0, 0),
+          userId: 1
         },
         //Zweitagsfreuden
         {
-          id: 4,
-          message: 'ich freue mich auf den Urlaub!',
-          createdAt: new Date(2024, 4, 23, 12, 58),
-          enddatum: new Date(2024, 4, 24, 0, 0)
+          id: uuidv4(),
+          text: 'ich freue mich auf den Ausflug!',
+          createdAt: new Date(2024, 5, 5, 12, 58),
+          date: new Date(2024, 5, 7, 0, 0),
+          userId: 1
         },
         {
-          id: 5,
-          message: 'ich freue mich auf den Urlaub!',
-          createdAt: new Date(2024, 4, 24, 12, 58),
-          enddatum: new Date(2024, 4, 25, 0, 0)
+          id: uuidv4(),
+          text: 'ich freue mich auf die Präsentation der App!',
+          createdAt: new Date(2024, 5, 1, 12, 58),
+          date: new Date(2024, 5, 3, 0, 0),
+          userId: 1
         },
         //Dreitagsfreuden
         {
-          id: 6,
-          message: 'ich freue mich auf den Urlaub!',
-          createdAt: new Date(2024, 4, 23, 12, 58),
-          enddatum: new Date(2024, 4, 25, 0, 0)
+          id: uuidv4(),
+          text: 'ich freue mich auf das Wochenende!',
+          createdAt: new Date(2024, 4, 29, 12, 58),
+          date: new Date(2024, 4, 31, 0, 0),
+          userId: 1
         },
         //Mehrtagsfreuden
         {
-          id: 7,
-          message: 'ich freue mich auf den Urlaub!',
+          id: uuidv4(),
+          text: 'ich freue mich auf den Urlaub!',
           createdAt: new Date(2024, 4, 20, 12, 58),
-          enddatum: new Date(2024, 4, 23, 0, 0)
+          date: new Date(2024, 5, 23, 0, 0),
+          userId: 1
         },
         {
-          id: 8,
-          message: 'ich freue mich auf den Urlaub!',
+          id: uuidv4(),
+          text: 'ich freue mich auf den Sommer!',
           createdAt: new Date(2024, 4, 20, 12, 58),
-          enddatum: new Date(2024, 4, 24, 0, 0)
+          date: new Date(2024, 6, 24, 0, 0),
+          userId: 1
         },
         {
-          id: 9,
-          message: 'ich freue mich auf den Urlaub!',
+          id: uuidv4(),
+          text: 'ich freue mich auf den Besuch!',
           createdAt: new Date(2024, 4, 20, 12, 58),
-          enddatum: new Date(2024, 4, 25, 0, 0)
+          date: new Date(2024, 4, 31, 0, 0),
+          userId: 1
         },
         {
-          id: 10,
-          message: 'ich freue mich auf den Urlaub!',
-          createdAt: new Date(2024, 4, 23, 12, 58),
-          enddatum: new Date(2024, 4, 28, 0, 0)
+          id: uuidv4(),
+          text: 'ich freue mich auf die Reise!',
+          createdAt: new Date(2024, 5, 1, 12, 58),
+          date: new Date(2024, 6, 28, 0, 0),
+          userId: 1
         },
         {
-          id: 11,
-          message: 'ich freue mich auf den Urlaub!',
-          createdAt: new Date(2024, 4, 24, 12, 58),
-          enddatum: new Date(2024, 4, 28, 0, 0)
+          id: uuidv4(),
+          text: 'ich freue mich auf das Konzert!',
+          createdAt: new Date(2024, 5, 3, 12, 58),
+          date: new Date(2024, 5, 28, 0, 0),
+          userId: 1
         },
         {
-          id: 12,
-          message: 'ich freue mich auf den Urlaub!',
-          createdAt: new Date(2024, 4, 25, 12, 58),
-          enddatum: new Date(2024, 4, 28, 0, 0)
+          id: uuidv4(),
+          text: 'ich freue mich auf das Wiedersehen mit meiner Schulfreundin!',
+          createdAt: new Date(2024, 5, 5, 12, 58),
+          date: new Date(2024, 5, 10, 0, 0),
+          userId: 1
         },
         {
-          id: 13,
-          message: 'ich freue mich auf den Urlaub!',
+          id: uuidv4(),
+          text: 'ich freue mich auf das Festival!',
           createdAt: new Date(2024, 4, 20, 12, 58),
-          enddatum: new Date(2024, 4, 31, 0, 0)
+          date: new Date(2024, 7, 31, 0, 0),
+          userId: 1
         }
       ]
     }
@@ -150,13 +164,13 @@ export default {
 <style scoped>
 .overview {
   padding: 1rem;
-  color: Hotpink;
+  color: #ec635e;
   text-align: center;
 }
 .horizontal-list {
-  color: Hotpink;
+  color: #ec635e;
   text-align: center;
-  border-bottom: 2px hotpink solid;
+  border-bottom: 2px #ec635e solid;
   padding-bottom: 0.7rem;
   display: flex;
   justify-content: space-between;
@@ -171,7 +185,7 @@ export default {
   left: 30px;
   width: 0.8rem;
   height: 0.8rem;
-  background-color: hotpink;
+  background-color: #ec635e;
   border-radius: 50%;
 }
 </style>

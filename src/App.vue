@@ -15,9 +15,9 @@ html {
   min-height: 100vh;
   max-width: 20rem;
   min-width: 20rem;
-  background-color: darkblue;
+  background-color: #020b30;
   border-radius: 2rem;
-  padding: 1rem;
+  overflow: hidden;
 }
 </style>
 
