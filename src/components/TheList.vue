@@ -23,7 +23,7 @@
         </div>
 
         <!-- share and delete buttons -->
-        <div class="btn-wrapper">
+        <!-- <div class="btn-wrapper">
           <button class="share-btn">
             <svg
               width="32px"
@@ -67,7 +67,7 @@
               </g>
             </svg>
           </button>
-        </div>
+        </div> -->
       </section>
     </li>
     <!-- Empty textarea for new gratitude: always displayed below the last entry -->
@@ -94,7 +94,8 @@ import { useGratitudesStore } from '../stores/gratitudes'
 export default {
   data() {
     return {
-      text: ''
+      text: '',
+      throttledEditGratitude: null
     }
   },
   props: {
@@ -131,8 +132,23 @@ export default {
         this.text = ''
       }
     },
-    handleEditingGratitude(id, text) {
+    throttle(func, limit) {
+      let inThrottle
+      return function () {
+        const context = this
+        const args = arguments
+        if (!inThrottle) {
+          func.apply(context, args)
+          inThrottle = true
+          setTimeout(() => (inThrottle = false), limit)
+        }
+      }
+    },
+    editGratitude(id, text) {
       this.gratitudesStore.editGratitude(id, text)
+    },
+    handleEditingGratitude(id, text) {
+      this.throttledEditGratitude(id, text)
     },
     handleDeletingGratitude(id, text) {
       const store = this.gratitudesStore
@@ -147,6 +163,9 @@ export default {
       element.style.height = 'auto'
       element.style.height = element.scrollHeight + 'px'
     }
+  },
+  created() {
+    this.throttledEditGratitude = this.throttle(this.editGratitude, 1000)
   },
   mounted() {
     // get gratitudes from api
@@ -186,7 +205,8 @@ export default {
 ul {
   color: white;
   list-style-type: none;
-  padding-left: 0;
+  padding-left: 3.5rem;
+  padding-top: 2rem;
 }
 
 li {
@@ -221,21 +241,21 @@ textarea {
   /* border: 2px solid white; */
 }
 
-section {
+/* section {
   display: flex;
   justify-content: space-between;
-}
+} */
 
-.btn-wrapper {
+/* .btn-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-}
+} */
 
-button {
+/* button {
   background-color: transparent;
   border: none;
   margin: 0;
   padding: 0;
-}
+} */
 </style>
