@@ -1,11 +1,11 @@
 <template>
-  <TheList singleNote="single-anticipation" placeholderText="Ich freuen mich auf..." />
+  <TheVorfreuden singleNote="single-anticipation" placeholderText="Ich freuen mich auf..." />
 </template>
 
 <script>
-import TheList from '../components/TheList.vue'
+import TheVorfreuden from '../components/TheVorfreuden.vue'
 export default {
-  components: { TheList },
+  components: { TheVorfreuden },
   props: ['singleNote', 'placeholderText']
 }
 </script>
