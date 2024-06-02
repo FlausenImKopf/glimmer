@@ -68,8 +68,29 @@ export const useGratitudesStore = defineStore('gratitudes', {
       // this.gratitudes.push({ text, createdAt, userId })
     },
     editGratitude(id, text) {
-      const toBeEdited = this.gratitudes.find((gratitude) => gratitude.id === id)
-      toBeEdited.text = text
+      fetch(`http://localhost:3000/gratitudes/${id}`, {
+        method: 'PATCH',
+        body: JSON.stringify({ text: text }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`)
+          }
+          return response.json()
+        })
+        .then((data) => {
+          data.text = text
+          this.getGratitudes()
+        })
+        .catch((error) => {
+          console.error('Failed to edit gratitude:', error)
+        })
+
+      // const toBeEdited = this.gratitudes.find((gratitude) => gratitude.id === id)
+      // toBeEdited.text = text
     },
     deleteGratitude(id) {
       fetch(`http://localhost:3000/gratitudes/${id}`, {
