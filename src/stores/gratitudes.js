@@ -25,24 +25,6 @@ export const useGratitudesStore = defineStore('gratitudes', {
   },
   persist: true,
   actions: {
-    // function refresh() {
-    //   fetch("http://localhost:4730/todos")
-    //     .then((response) => {
-    //       return response.json();
-    //     })
-    //     .then((data) => {
-    //       state.todos = data;
-    //       state.error = "";
-    //       render();
-    //     })
-    //     .catch(() => {
-    //       state.error = {
-    //         description: "Sorry, we couldn't reach the backend.",
-    //       };
-    //       render();
-    //     });
-    // }
-
     getGratitudes() {
       fetch('http://localhost:3000/gratitudes')
         .then((response) => {
