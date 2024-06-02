@@ -8,18 +8,18 @@
             :id="'one-of-todays-anticipations-with-ID :' + anticipation.id"
             :name="'one-of-todays-anticipations-with-ID :' + anticipation.id"
           >
-            <label :for="'ID_' + anticipation.id">
-              <textarea
-                :value="anticipation.text"
-                :placeholder="placeholderText"
-                :id="'ID_' + anticipation.id"
-                :name="singleNote"
-                ref="textarea"
-                @keydown.enter.exact.prevent="handleChangingAnticipation($event, anticipation.id)"
-              >
+            <label :for="'ID_' + anticipation.id">{{ cetDate(anticipation.date) }}</label>
+            <textarea
+              :value="anticipation.text"
+              :placeholder="placeholderText"
+              :id="'ID_' + anticipation.id"
+              :name="singleNote"
+              ref="textarea"
+              @keydown.enter.exact.prevent="handleChangingAnticipation($event, anticipation.id)"
+            >
                 <!-- @blur="handleChangingAnticipation($event, anticipation.id)" -->
-              </textarea>
-            </label>
+              </textarea
+            >
           </form>
         </div>
 
@@ -71,21 +71,48 @@
           </div> -->
       </section>
     </li>
-    <!-- Empty textarea for new anticipation: always displayed below the last entry -->
-    <li>
-      <form id="add-new-anticipation-for-today-here" name="add-new-anticipation-for-today-here">
-        <label>
-          <textarea
-            v-model="text"
-            placeholder="Heute freue ich mich auf..."
-            @input="resize($event)"
-            @keydown.enter.exact.prevent="handleNewAnticipation()"
-            @blur="handleNewAnticipation()"
-          ></textarea>
-        </label>
-      </form>
-    </li>
   </ul>
+  <!-- Empty textarea for new anticipation: always displayed below the last entry -->
+  <div class="calender-button-wrapper" v-if="isVisibleButton">
+    <button class="calendar-button" @click="toggleBoth">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="25"
+        height="25"
+        fill="currentColor"
+        class="bi bi-calendar-date"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M6.445 11.688V6.354h-.633A13 13 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23"
+        />
+        <path
+          d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"
+        />
+      </svg>
+    </button>
+    <p>
+      Wähle den Tag aus, <br />
+      auf den du dich freust
+    </p>
+  </div>
+  <div class="calendar-wrapper" v-if="isVisibleCalendar">
+    <div class="calendar">
+      <VDatePicker v-model="selectedDate" mode="selectedDate" @dayclick="toggleVisibility()" />
+    </div>
+  </div>
+  <div v-if="!isVisibleButton && !isVisibleCalendar">
+    <form id="add-new-anticipation-for-today-here" name="add-new-anticipation-for-today-here">
+      <label for="add-new-anticipation-for-today-here">{{ datum }}</label>
+      <textarea
+        v-model="text"
+        placeholder="Heute freue ich mich auf..."
+        @input="resize($event)"
+        @keydown.enter.exact.prevent="handleNewAnticipation()"
+        @blur="handleNewAnticipation()"
+      ></textarea>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -95,7 +122,11 @@ import { useAnticipationsStore } from '../stores/anticipations'
 export default {
   data() {
     return {
-      text: ''
+      text: '',
+      isVisibleCalendar: false,
+      isVisibleButton: true,
+      selectedDate: null,
+      eachDate: ''
       // throttledEditAnticipation: null
     }
   },
@@ -120,41 +151,64 @@ export default {
           createdAt.getFullYear() === rightNow.getFullYear()
         )
       })
+    },
+    datum() {
+      const date = this.selectedDate
+      if (date !== null) {
+        // Create a Date object from the selectedDate
+        const dateObj = new Date(date)
+
+        // Options for formatting the date
+        const options = {
+          day: 'numeric',
+          month: 'short',
+          year: 'numeric'
+        }
+
+        // Format the date using Intl.DateTimeFormat
+        return new Intl.DateTimeFormat('en-GB', options).format(dateObj)
+      } else {
+        return ''
+      }
     }
   },
   methods: {
+    toggleVisibility() {
+      console.log(this.selectedDate)
+      this.isVisibleCalendar = !this.isVisibleCalendar
+    },
+    toggleButton() {
+      this.isVisibleButton = !this.isVisibleButton
+    },
+    toggleBoth() {
+      this.toggleButton()
+      this.toggleVisibility()
+    },
+    cetDate(dateString) {
+      const date = new Date(dateString)
+      const options = {
+        timeZone: 'Europe/Berlin',
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      }
+      return new Intl.DateTimeFormat('en-GB', options).format(date)
+    },
     handleNewAnticipation() {
       if (this.text.length === 0) {
         return
       } else {
         const createdAt = Date.now()
         // TODO: add calendar functionality here:
-        const date = 'Mon May 27 2024 09:51:20 GMT+0200 (Central European Summer Time)'
+        const date = this.selectedDate
+        console.log(date)
         const userId = 'c2dfc86e-53da-4404-8acd-7497853b8496'
         this.anticipationsStore.addAnticipation(this.text, createdAt, date, userId)
         this.text = ''
+        this.selectedDate = null
+        this.toggleButton()
       }
     },
-    // TODO: throttle edit anders lösen: scheint immer noch nicht zu funktionieren. Eventuell local storag verändern und erst bei Ruhe in die Api speichern?
-    // throttle(func, limit) {
-    //   let inThrottle
-    //   return function () {
-    //     const context = this
-    //     const args = arguments
-    //     if (!inThrottle) {
-    //       func.apply(context, args)
-    //       inThrottle = true
-    //       setTimeout(() => (inThrottle = false), limit)
-    //     }
-    //   }
-    // },
-    // editAnticipation(id, text) {
-    //   this.anticipationsStore.editAnticipation(id, text)
-    // },
-    // handleEditingAnticipation(event, id, text) {
-    //   this.anticipationsStore.editAnticipation(id, text)
-    //   event.target.blur()
-    // this.throttledEditAnticipation(id, text)
 
     handleChangingAnticipation(event, id) {
       const text = event.target.value
@@ -237,6 +291,7 @@ li::before {
 
 textarea {
   background-color: darkblue;
+  padding-top: 1rem;
   color: white;
   width: 200px;
   min-height: 10px;
@@ -249,6 +304,40 @@ textarea {
   /* border: 2px solid white; */
 }
 
+div {
+  color: white;
+}
+
+.calendar-button {
+  background-color: transparent;
+  color: #81dee4;
+  border: none;
+  /* margin: 0; */
+  margin-left: 3rem;
+  padding: 0;
+}
+
+.calender-button-wrapper {
+  color: white;
+  display: flex;
+}
+
+p {
+  padding-left: 1rem;
+}
+.calendar {
+  position: absolute;
+  left: 2rem;
+  z-index: 1;
+}
+
+.calendar-wrapper {
+  position: relative;
+}
+
+#add-new-anticipation-for-today-here {
+  margin-left: 5rem;
+}
 /* section {
     display: flex;
     justify-content: space-between;
