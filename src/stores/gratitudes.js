@@ -25,14 +25,66 @@ export const useGratitudesStore = defineStore('gratitudes', {
   },
   persist: true,
   actions: {
-    async getGratitudes() {
-      const response = await fetch('http://localhost:3000/gratitudes')
-      const data = await response.json()
-      this.gratitudes = data
+    // function refresh() {
+    //   fetch("http://localhost:4730/todos")
+    //     .then((response) => {
+    //       return response.json();
+    //     })
+    //     .then((data) => {
+    //       state.todos = data;
+    //       state.error = "";
+    //       render();
+    //     })
+    //     .catch(() => {
+    //       state.error = {
+    //         description: "Sorry, we couldn't reach the backend.",
+    //       };
+    //       render();
+    //     });
+    // }
+
+    getGratitudes() {
+      fetch('http://localhost:3000/gratitudes')
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`)
+          }
+          return response.json()
+        })
+        .then((data) => {
+          this.gratitudes = data
+        })
+        .catch((error) => {
+          console.error('Failed to fetch gratitudes:', error)
+        })
     },
-    addGratitude(text) {
-      this.gratitudes.push({ text, id: uuidv4(), createdAt: new Date() })
+    addGratitude(text, createdAt, userId) {
+      const newGratitude = {
+        text: text,
+        createdAt: createdAt,
+        userId: userId
+      }
+      fetch('http://localhost:3000/gratitudes', {
+        method: 'POST',
+        body: JSON.stringify(newGratitude),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`)
+          }
+          return response.json()
+        })
+        .then(() => {
+          this.getGratitudes()
+        })
+        .catch((error) => {
+          console.error('Failed to add gratitude:', error)
+        })
     },
+    // this.gratitudes.push({ text, createdAt, userId })
     editGratitude(id, text) {
       const toBeEdited = this.gratitudes.find((gratitude) => gratitude.id === id)
       toBeEdited.text = text

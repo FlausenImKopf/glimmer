@@ -125,7 +125,9 @@ export default {
       if (this.text.length === 0) {
         return
       } else {
-        this.gratitudesStore.addGratitude(this.text)
+        const createdAt = Date.now()
+        const userId = 'c2dfc86e-53da-4404-8acd-7497853b8496'
+        this.gratitudesStore.addGratitude(this.text, createdAt, userId)
         this.text = ''
       }
     },
@@ -147,6 +149,9 @@ export default {
     }
   },
   mounted() {
+    // get gratitudes from api
+    this.gratitudesStore.getGratitudes()
+    // resize textareas
     this.$nextTick(() => {
       const textarea = this.$refs.textarea
       if (textarea) {
