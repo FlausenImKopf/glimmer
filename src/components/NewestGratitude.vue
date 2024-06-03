@@ -6,7 +6,7 @@
         :name="'show-one-of-todays-gratitudes-with-ID :' + gratitude.id"
       >
         <!-- TODO: keine headlines in form-Elementen wegen accessibility -->
-        <h2>Dankbarkeit</h2>
+        <!-- <h2>Dankbarkeit</h2> -->
         <label :for="'ID_' + gratitude.id">
           <textarea
             :value="gratitude.text"
@@ -91,7 +91,6 @@ ul {
   color: #4f65df;
   list-style-type: none;
   padding-left: 0;
-  margin-left: 1.6rem;
 }
 
 li {
@@ -101,28 +100,32 @@ li {
   right: 1.75rem;
 }
 
-h2 {
+/* h2 {
   margin-bottom: 0.2rem;
   color: #5ce1e6;
-}
+} */
 
 form::before {
   content: url(../../public/header-star-green.png);
   position: absolute;
-  left: -11.5rem;
-  top: -6.1rem;
+  left: -10rem;
+  top: -8.4rem;
   transform: scale(0.13);
 }
 
 textarea {
-  color: #4f65df;
+  color: #5ce1e6;
   min-height: 10px;
-  padding: 2px;
+  padding: 1rem;
   resize: none;
   overflow: hidden;
-  background-color: transparent;
+  background-color: rgba(92, 225, 230, 0.1);
   border: none;
   border-radius: 4px;
+}
+
+textarea:hover {
+  background-color: rgba(92, 225, 230, 0.4);
 }
 </style>
 
