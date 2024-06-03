@@ -279,14 +279,11 @@ li {
 }
 
 li::before {
-  content: ' ';
+  content: url(../../public/header-star-red.png);
   position: absolute;
-  left: -0rem;
-  top: 0.2rem;
-  width: 0.8rem;
-  height: 0.8rem;
-  background-color: #5ce1e6;
-  border-radius: 50%;
+  left: -10.5rem;
+  top: -8rem;
+  transform: scale(0.13);
 }
 
 textarea {
@@ -310,7 +307,7 @@ div {
 
 .calendar-button {
   background-color: transparent;
-  color: #81dee4;
+  color: #ec635e;
   border: none;
   /* margin: 0; */
   margin-left: 3rem;
