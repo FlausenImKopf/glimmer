@@ -1,125 +1,20 @@
 <template>
   <main>
-    <!-- List of today's gratitudes -->
-    <ul>
-      <li v-for="gratitude in gratitudesToday" :key="gratitude.id">
-        <form
-          :id="'show-one-of-todays-gratitudes-with-ID: ' + gratitude.id"
-          :name="'show-one-of-todays-gratitudes-with-ID :' + gratitude.id"
-        >
-          <label :for="'ID_' + gratitude.id">
-            <textarea
-              :value="gratitude.text"
-              placeholder="Heute bin ich dankbar für..."
-              :id="'ID_' + gratitude.id"
-              ref="textarea"
-              @click="$router.push('/dankbarkeiten')"
-            ></textarea>
-          </label>
-        </form>
-      </li>
-      <!-- Empty textarea for new gratitude: only visible if no gratitudes have been written yet on any given day -->
-      <li v-if="noGratitudesYet">
-        <form id="add-new-gratitude-for-today" name="add-new-gratitude-for-today">
-          <label>
-            <textarea
-              placeholder="Heute bin ich dankbar für..."
-              @click="$router.push('/dankbarkeiten')"
-            ></textarea>
-          </label>
-        </form>
-      </li>
-    </ul>
+    <NewestAnticipation />
+    <NewestGratitude />
   </main>
 </template>
 
 <script>
-import { mapStores } from 'pinia'
-import { useGratitudesStore } from '../stores/gratitudes'
-
+import NewestGratitude from '../components/NewestGratitude.vue'
+import NewestAnticipation from '../components/NewestAnticipation.vue'
 export default {
-  data() {
-    return {}
-  },
-  computed: {
-    ...mapStores(useGratitudesStore),
-    gratitudesToday: function () {
-      return this.gratitudesStore.gratitudes.filter((gratitude) => {
-        const createdAt = new Date(gratitude.createdAt)
-        const rightNow = new Date()
-        return (
-          createdAt.getDate() === rightNow.getDate() &&
-          createdAt.getMonth() === rightNow.getMonth() &&
-          createdAt.getFullYear() === rightNow.getFullYear()
-        )
-      })
-    },
-    noGratitudesYet() {
-      return this.gratitudesToday.length === 0
-    }
-  },
-  methods: {
-    resize(event) {
-      const element = event.target
-      element.style.height = 'auto'
-      element.style.height = element.scrollHeight + 'px'
-    }
-  },
-  mounted() {
-    // Adjusts textarea-sizing when the app is mounted
-    this.$nextTick(() => {
-      const textarea = this.$refs.textarea
-      if (textarea) {
-        if (Array.isArray(textarea)) {
-          textarea.forEach((textarea) => {
-            this.resize({ target: textarea })
-          })
-        } else {
-          this.resize({ target: textarea })
-        }
-      }
-    })
-  }
+  components: { NewestGratitude, NewestAnticipation }
 }
 </script>
 
 <style scoped>
 main {
   padding: 2rem;
-}
-.timeline-view-links {
-  display: flex;
-}
-
-ul {
-  color: #4f65df;
-  list-style-type: none;
-  padding-left: 0;
-}
-
-li {
-  position: relative;
-  margin-bottom: 1em;
-  left: 1.75rem;
-  right: 1.75rem;
-}
-
-form::before {
-  content: url(../../public/header-star-green.png);
-  position: absolute;
-  left: -11.5rem;
-  top: -8rem;
-  transform: scale(0.13);
-}
-
-textarea {
-  color: #4f65df;
-  min-height: 10px;
-  padding: 2px;
-  resize: none;
-  overflow: hidden;
-  background-color: transparent;
-  border: none;
-  border-radius: 4px;
 }
 </style>

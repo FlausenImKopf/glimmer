@@ -1,7 +1,7 @@
 <template>
   <main>
     <TheList singleNote="single-gratitude" placeholderText="Ich bin dankbar für..." />
-    <button @click="$router.push('/')">speichern</button>
+    <!-- <button @click="$router.push('/')">speichern</button> -->
   </main>
 </template>
 

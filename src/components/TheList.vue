@@ -1,5 +1,6 @@
 <template>
   <!-- List of gratitudes: today's gratitudes -->
+  <h2>Meine Dankbarkeiten heute</h2>
   <ul>
     <li v-for="gratitude in gratitudesToday" :key="gratitude.id">
       <section class="displays-each-gratitude-today">
@@ -71,21 +72,19 @@
         </div> -->
       </section>
     </li>
-    <!-- Empty textarea for new gratitude: always displayed below the last entry -->
-    <li>
-      <form id="add-new-gratitude-for-today-here" name="add-new-gratitude-for-today-here">
-        <label>
-          <textarea
-            v-model="text"
-            placeholder="Heute bin ich dankbar für..."
-            @input="resize($event)"
-            @keydown.enter.exact.prevent="handleNewGratitude()"
-            @blur="handleNewGratitude()"
-          ></textarea>
-        </label>
-      </form>
-    </li>
   </ul>
+  <!-- Empty textarea for new gratitude: always displayed below the last entry -->
+  <form id="add-new-gratitude-for-today-here" name="add-new-gratitude-for-today-here">
+    <label>
+      <textarea
+        v-model="text"
+        placeholder="Hier die Dankbarkeit eingeben und mit Enter speichern"
+        @input="resize($event)"
+        @keydown.enter.exact.prevent="handleNewGratitude()"
+        @blur="handleNewGratitude()"
+      ></textarea>
+    </label>
+  </form>
 </template>
 
 <script>
@@ -211,6 +210,22 @@ export default {
 </script>
 
 <style scoped>
+/* antonio-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Antonio';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../../public/antonio-v19-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+h2 {
+  color: #5ce1e6;
+  margin-left: 2.5rem;
+  margin-top: 1rem;
+  font-family: 'Antonio';
+}
+
 ul {
   color: white;
   list-style-type: none;
@@ -225,15 +240,12 @@ li {
   margin-right: 2rem;
 }
 
-li::before {
-  content: ' ';
+form::before {
+  content: url(../../public/header-star-green.png);
   position: absolute;
-  left: -0rem;
-  top: 0.2rem;
-  width: 0.8rem;
-  height: 0.8rem;
-  background-color: #5ce1e6;
-  border-radius: 50%;
+  left: -10.5rem;
+  top: -8rem;
+  transform: scale(0.13);
 }
 
 textarea {
@@ -248,6 +260,10 @@ textarea {
   border: none;
   border-radius: 4px;
   /* border: 2px solid white; */
+}
+
+#add-new-gratitude-for-today-here {
+  margin-left: 4.5rem;
 }
 
 /* section {
