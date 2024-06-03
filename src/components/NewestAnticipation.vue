@@ -6,7 +6,7 @@
         :name="'show-one-of-todays-anticipations-with-ID :' + anticipation.id"
       >
         <!-- TODO: keine headlines in form-Elementen wegen accessibility -->
-        <h2>Vorfreuden</h2>
+        <!-- <h2>Vorfreuden</h2> -->
         <label :for="'ID_' + anticipation.id">
           <textarea
             :value="anticipation.text"
@@ -91,7 +91,7 @@ ul {
   color: #4f65df;
   list-style-type: none;
   padding-left: 0;
-  margin-left: 1.6rem;
+  /* margin-left: 1.6rem; */
 }
 
 li {
@@ -101,28 +101,33 @@ li {
   right: 1.75rem;
 }
 
-h2 {
+/* h2 {
   margin-bottom: 0.2rem;
   color: #ec635e;
-}
+} */
 
 form::before {
   content: url(../../public/header-star-red.png);
   position: absolute;
-  left: -11.5rem;
-  top: -6.1rem;
+  left: -10rem;
+  top: -8.4rem;
   transform: scale(0.13);
 }
 
 textarea {
-  color: #4f65df;
+  color: #ec635e;
+  background-color: rgba(236, 99, 94, 0.1);
   min-height: 10px;
-  padding: 2px;
+  /* padding: 2px; */
   resize: none;
   overflow: hidden;
-  background-color: transparent;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+textarea:hover {
+  background-color: rgba(236, 99, 94, 0.4);
 }
 </style>
 
