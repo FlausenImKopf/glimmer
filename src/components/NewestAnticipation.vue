@@ -23,7 +23,7 @@
       <form id="add-new-anticipation-for-today" name="add-new-anticipation-for-today">
         <label>
           <textarea
-            placeholder="Ich freue mich anticipation..."
+            placeholder="Heute freue ich mich auf..."
             @click="$router.push('/vorfreuden')"
           ></textarea>
         </label>
@@ -128,6 +128,10 @@ textarea {
 
 textarea:hover {
   background-color: rgba(236, 99, 94, 0.4);
+}
+
+::placeholder {
+  color: rgba(236, 99, 94, 0.4);
 }
 </style>
 

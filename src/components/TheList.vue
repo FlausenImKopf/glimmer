@@ -161,12 +161,11 @@ export default {
     handleChangingGratitude(event, id) {
       const text = event.target.value
       const store = this.gratitudesStore
-      if (this.text.length === 0) {
+      if (text === '') {
         return store.deleteGratitude(id)
-      } else if (this.text.length !== 0) {
+      } else {
         store.editGratitude(id, text)
         event.target.blur()
-        console.log('this line below blur was triggered.')
       }
     },
     resize(event) {
@@ -271,6 +270,12 @@ textarea {
 
 textarea:hover {
   background-color: rgba(92, 225, 230, 0.4);
+}
+
+textarea:focus {
+  background-color: rgba(92, 225, 230, 0.4);
+  border: none;
+  outline: none;
 }
 
 #add-new-gratitude-for-today-here {

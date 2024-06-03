@@ -127,6 +127,10 @@ textarea {
 textarea:hover {
   background-color: rgba(92, 225, 230, 0.4);
 }
+
+::placeholder {
+  color: rgba(92, 225, 230, 0.4);
+}
 </style>
 
 <!-- TODO: besseres Layout der Textfelder -->
