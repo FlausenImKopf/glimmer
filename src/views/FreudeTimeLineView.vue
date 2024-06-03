@@ -14,7 +14,7 @@
     </section>
     <section class="list">
       <FreudListRow
-        v-for="freude in vorfreuden"
+        v-for="freude in getVorfreuden()"
         :key="freude.id"
         :vorfreude="freude"
         :currentDate="currentDate"
@@ -53,6 +53,47 @@ export default {
       let followingDay = new Date(this.currentDate)
       followingDay.setDate(followingDay.getDate() + 1)
       return followingDay
+    },
+
+    getVorfreuden() {
+      let result = []
+      for (let vorfreude of this.vorfreuden) {
+        if (
+          (this.istKleiner(vorfreude.createdAt, this.getFollowingDay()) ||
+            this.istGleich(vorfreude.createdAt, this.getFollowingDay())) &&
+          (this.istGroesser(vorfreude.date, this.getPreviousDay()) ||
+            this.istGleich(vorfreude.date, this.getPreviousDay()))
+        ) {
+          result.push(vorfreude)
+        }
+      }
+      console.log(result)
+      return result
+    },
+
+    istGleich(firstDate, secondDate) {
+      return (
+        firstDate.getFullYear() == secondDate.getFullYear() &&
+        firstDate.getMonth() == secondDate.getMonth() &&
+        firstDate.getDate() == secondDate.getDate()
+      )
+    },
+    istKleiner(firstDate, secondDate) {
+      if (firstDate.getFullYear() < secondDate.getFullYear()) {
+        return true
+      } else if (firstDate.getFullYear() == secondDate.getFullYear()) {
+        if (firstDate.getMonth() < secondDate.getMonth()) {
+          return true
+        } else if (firstDate.getMonth() == secondDate.getMonth()) {
+          if (firstDate.getDate() < secondDate.getDate()) {
+            return true
+          }
+        }
+      }
+      return false
+    },
+    istGroesser(firstDate, secondDate) {
+      return !this.istKleiner(firstDate, secondDate) && !this.istGleich(firstDate, secondDate)
     }
   },
 
@@ -162,7 +203,15 @@ export default {
 </script>
 
 <style scoped>
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Antonio';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../../public/antonio-v19-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
 .overview {
+  font-family: 'Antonio';
   padding: 1rem;
   color: #ec635e;
   text-align: center;
@@ -177,6 +226,9 @@ export default {
 }
 .data-container {
   position: relative;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.5rem;
 }
 .data::before {
   content: ' ';
