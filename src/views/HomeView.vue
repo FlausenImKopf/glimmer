@@ -1,5 +1,6 @@
 <template>
   <main>
+    <h2>Mein Tag</h2>
     <NewestAnticipation />
     <NewestGratitude />
   </main>
@@ -16,5 +17,15 @@ export default {
 <style scoped>
 main {
   padding: 2rem;
+}
+
+h2 {
+  color: #4f65df;
+  background-color: rgb(79, 101, 223, 0.1);
+  padding: 1rem;
+  border-radius: 4px;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  text-align: center;
 }
 </style>

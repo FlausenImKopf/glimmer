@@ -30,10 +30,10 @@
 }
 .wrapper {
   font-family: 'Antonio';
-  background-color: black;
+  background-color: rgb(79, 101, 223, 0.2);
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  color: #81dee4;
+  color: #4f65df;
   padding: 2rem 0.8rem 1rem 0.8rem;
   _padding-bottom: 1rem;
 }

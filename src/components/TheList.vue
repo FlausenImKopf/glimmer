@@ -221,8 +221,9 @@ export default {
 
 h2 {
   color: #5ce1e6;
+  margin-top: 2rem;
   margin-left: 2.5rem;
-  margin-top: 1rem;
+  margin-bottom: 1rem;
   font-family: 'Antonio';
 }
 
@@ -235,35 +236,49 @@ ul {
 
 li {
   position: relative;
-  padding-left: 1.5em;
-  margin-bottom: 1em;
+  /* padding-left: 1.5em; */
+  margin-bottom: 1rem;
   margin-right: 2rem;
+  left: 0.6rem;
 }
 
 form::before {
   content: url(../../public/header-star-green.png);
   position: absolute;
-  left: -10.5rem;
-  top: -8rem;
+  left: -10rem;
+  top: -8.4rem;
   transform: scale(0.13);
+}
+#add-new-gratitude-for-today-here {
+  position: relative;
+  left: -1rem;
+}
+
+#add-new-gratitude-for-today-here::before {
+  content: none;
 }
 
 textarea {
-  background-color: darkblue;
-  color: white;
-  width: 200px;
-  min-height: 10px;
-  padding: 2px;
+  color: #5ce1e6;
+  min-height: 5rem;
+  padding: 1rem;
   resize: none;
   overflow: hidden;
-  background-color: transparent;
+  background-color: rgba(92, 225, 230, 0.1);
   border: none;
   border-radius: 4px;
-  /* border: 2px solid white; */
+}
+
+textarea:hover {
+  background-color: rgba(92, 225, 230, 0.4);
 }
 
 #add-new-gratitude-for-today-here {
-  margin-left: 4.5rem;
+  margin-left: 5.1rem;
+}
+
+::placeholder {
+  color: rgba(92, 225, 230, 0.4);
 }
 
 /* section {

@@ -1,7 +1,7 @@
 <template>
   <main>
     <TheList singleNote="single-gratitude" placeholderText="Ich bin dankbar für..." />
-    <!-- <button @click="$router.push('/')">speichern</button> -->
+    <button @click="$router.push('/')">zurück zu Mein Tag</button>
   </main>
 </template>
 
@@ -20,11 +20,16 @@ main {
 
 button {
   position: absolute;
-  left: 13.5rem;
-  color: #101c42;
-  background-color: #5ce1e6;
+  bottom: -23rem;
+  left: 10rem;
+  color: #5ce1e6;
+  background-color: rgb(92, 225, 230, 0.1);
   border: none;
-  box-shadow: 1px 2px 5px rgba(92, 225, 230, 0.4);
-  border-radius: 0.1rem;
+  border-radius: 4px;
+  padding: 0.5rem;
+}
+
+button:hover {
+  background-color: rgb(92, 225, 230, 0.4);
 }
 </style>
