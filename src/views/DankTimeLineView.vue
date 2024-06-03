@@ -94,17 +94,11 @@ export default {
     },
 
     getDankbarkeiten() {
-      // Vorbereitung: invalide Daten aussortieren
-      let validValues = []
-      for (const value of Object.values(this.dankbarkeiten)) {
-        if (!isNaN(Date.parse(value.createdAt))) {
-          validValues.push(value)
-        }
-      }
       //1. Schritt - nach Datum sortieren. Hier ist danks ein Array
-      let danks = validValues.sort(
-        (dank1, dank2) => Date.parse(dank2.createdAt) - Date.parse(dank1.createdAt)
+      let danks = Object.values(this.dankbarkeiten).sort(
+        (dank1, dank2) => dank2.createdAt - dank1.createdAt
       )
+      console.log(danks)
       //2. Schritt - Dankbarkeiten nach Datum gruppieren und mit Datum als Key im Objekt speichern. Hier wird danks zum Object
       danks = this.splitSortedDankbarkeiten(danks)
 
