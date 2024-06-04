@@ -299,6 +299,7 @@ label {
   padding-right: 1rem;
   padding-top: 0.05rem;
   padding-bottom: 0.05rem;
+  font-family: monospace;
 }
 
 li::before {
@@ -310,6 +311,7 @@ li::before {
 }
 
 textarea {
+  font-family: monospace;
   color: #ec635e;
   background-color: rgba(236, 99, 94, 0.1);
   position: relative;
@@ -373,6 +375,7 @@ textarea:focus {
 
 p {
   padding-left: 1rem;
+  font-family: monospace;
 }
 .calendar {
   position: absolute;

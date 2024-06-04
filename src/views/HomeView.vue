@@ -23,6 +23,7 @@ main {
 
 h2 {
   color: #4f65df;
+  font-family: 'Antonio';
   background-color: rgb(79, 101, 223, 0.1);
   padding: 1rem;
   border-radius: 4px;
