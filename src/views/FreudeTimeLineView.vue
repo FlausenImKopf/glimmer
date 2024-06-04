@@ -44,6 +44,7 @@ export default {
         date.getFullYear()
       )
     },
+
     getPreviousDay() {
       let previousDay = new Date(this.currentDate)
       previousDay.setDate(previousDay.getDate() - 1)
@@ -67,7 +68,6 @@ export default {
           result.push(vorfreude)
         }
       }
-      console.log(result)
       return result
     },
 
@@ -221,6 +221,8 @@ export default {
   text-align: center;
   border-bottom: 2px #ec635e solid;
   padding-bottom: 0.7rem;
+  padding-top: 0.7rem;
+  margin-bottom: 0.7rem;
   display: flex;
   justify-content: space-between;
 }
