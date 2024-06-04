@@ -9,9 +9,9 @@
 </template>
 
 <script>
-import NewestGratitude from '../components/NewestGratitude.vue'
-import NewestAnticipation from '../components/NewestAnticipation.vue'
-import JarOfJoy from '../components/JarOfJoy.vue'
+import NewestGratitude from '../components/HomeViewComponents/NewestGratitude.vue'
+import NewestAnticipation from '../components/HomeViewComponents/NewestAnticipation.vue'
+import JarOfJoy from '../components/HomeViewComponents/JarOfJoy.vue'
 export default {
   components: { NewestGratitude, NewestAnticipation, JarOfJoy }
 }
@@ -39,7 +39,7 @@ JarOfJoy {
 h2 {
   color: #4f65df;
   font-family: 'Antonio';
-  background-color: rgb(79, 101, 223, 0.1);
+  background-color: rgba(79, 101, 223, 0.1);
   padding: 1rem;
   border-radius: 4px;
   margin-top: 0rem;

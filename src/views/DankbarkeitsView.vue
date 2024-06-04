@@ -1,6 +1,8 @@
 <template>
   <main>
+    <h2>Meine Dankbarkeiten heute</h2>
     <TheList singleNote="single-gratitude" placeholderText="Ich bin dankbar für..." />
+    <AddText />
     <InfoBlurb
       adjusting="adjusting-gratitude"
       text="Info: Speicher deine fertig geschriebene Dankbarkeit mit Enter"
@@ -12,11 +14,12 @@
 </template>
 
 <script>
-import TheList from '../components/TheList.vue'
+import TheList from '../components/DankbarkeitsViewComponents/TheList.vue'
 import InfoBlurb from '../components/InfoBlurb.vue'
+import AddText from '../components/DankbarkeitsViewComponents/AddText.vue'
 
 export default {
-  components: { TheList, InfoBlurb },
+  components: { TheList, InfoBlurb, AddText },
   props: ['singleNote', 'placeholderText', 'text', 'adjusting']
 }
 </script>
@@ -30,6 +33,16 @@ main {
   background-color: #020b30;
   border-radius: 2rem;
   overflow: hidden;
+  padding: 2rem;
+}
+
+h2 {
+  color: #5ce1e6;
+  font-family: 'Antonio';
+  padding-bottom: 1rem;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
 .btn-wrapper {

@@ -5,8 +5,6 @@
         :id="'show-one-of-todays-gratitudes-with-ID: ' + gratitude.id"
         :name="'show-one-of-todays-gratitudes-with-ID :' + gratitude.id"
       >
-        <!-- TODO: keine headlines in form-Elementen wegen accessibility -->
-        <!-- <h2>Dankbarkeit</h2> -->
         <label :for="'ID_' + gratitude.id">
           <textarea
             :value="gratitude.text"
@@ -34,7 +32,7 @@
 
 <script>
 import { mapStores } from 'pinia'
-import { useGratitudesStore } from '../stores/gratitudes'
+import { useGratitudesStore } from '../../stores/gratitudes'
 
 export default {
   data() {
@@ -98,11 +96,6 @@ li {
   margin-bottom: 1em;
 }
 
-/* h2 {
-  margin-bottom: 0.2rem;
-  color: #5ce1e6;
-} */
-
 form::before {
   content: url(../../public/header-star-green.png);
   position: absolute;
@@ -113,12 +106,12 @@ form::before {
 
 textarea {
   color: #5ce1e6;
+  background-color: rgba(92, 225, 230, 0.1);
   min-height: 10px;
   width: 100%;
   padding: 1rem;
   resize: none;
   overflow: hidden;
-  background-color: rgba(92, 225, 230, 0.1);
   border: none;
   border-radius: 4px;
 }
@@ -131,5 +124,3 @@ textarea:hover {
   color: rgba(92, 225, 230, 0.4);
 }
 </style>
-
-<!-- TODO: besseres Layout der Textfelder -->
