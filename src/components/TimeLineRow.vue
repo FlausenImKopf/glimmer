@@ -18,6 +18,7 @@ export default {
 }
 .message {
   margin: 0;
+  font-family: monospace;
 }
 .star {
   width: 2rem;

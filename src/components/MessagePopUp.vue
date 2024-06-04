@@ -18,7 +18,7 @@ export default {
   position: absolute;
   z-index: 1;
   top: 0px;
-
+  font-family: monospace;
   transition: opacity 0.8s ease;
 
   width: 200px;
