@@ -1,31 +1,48 @@
 <template>
-  <div class="jar-wrapper">
-    <img
-      src="/transparent-black-ribbon-cloudy-water-with-bubbles-in-glass-jar659d1f3b8f5825.2592727417047959635871.png"
-      alt="Ein Bild von einem Glas"
-      class="jar-image"
-    />
-    <div class="stars">
+  <section class="jar-of-joy">
+    <div class="jar-wrapper">
       <img
-        v-for="(star, index) in starPositions"
-        :key="index"
-        src="../../public/header-star-green.png"
-        alt="Star"
-        class="star"
-        :style="{ top: star.top, left: star.left }"
+        src="/transparent-black-ribbon-cloudy-water-with-bubbles-in-glass-jar659d1f3b8f5825.2592727417047959635871.png"
+        alt="Ein Bild von einem Glas"
+        class="jar-image"
       />
+      <div class="stars">
+        <img
+          v-for="(star, index) in gratitudeStarPositions"
+          :key="index"
+          src="../../public/header-star-green.png"
+          alt="Star"
+          class="star"
+          :style="{ top: star.top, left: star.left }"
+        />
+        <img
+          v-for="(star, index) in anticipationStarPositions"
+          :key="index"
+          src="../../public/header-star-red.png"
+          alt="Star"
+          class="star"
+          :style="{ top: star.top, left: star.left }"
+        />
+      </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
 import { mapStores } from 'pinia'
 import { useGratitudesStore } from '../stores/gratitudes'
+import { useAnticipationsStore } from '../stores/anticipations'
 
 export default {
   computed: {
-    ...mapStores(useGratitudesStore),
-    starPositions() {
+    ...mapStores(useGratitudesStore, useAnticipationsStore),
+    gratitudeStarPositions() {
+      return this.gratitudesStore.gratitudes.map(() => ({
+        top: this.generateStarPosition(),
+        left: this.generateStarPosition()
+      }))
+    },
+    anticipationStarPositions() {
       return this.gratitudesStore.gratitudes.map(() => ({
         top: this.generateStarPosition(),
         left: this.generateStarPosition()
@@ -33,40 +50,48 @@ export default {
     }
   },
   methods: {
-    getRandomPosition(min, max) {
-      return Math.random() * (max - min) + min
-    },
     generateStarPosition() {
-      return this.getRandomPosition(10, 90) + '%'
+      return Math.random() * 100 + '%'
     }
   },
 
   mounted() {
-    // get gratitudes from api
-    this.gratitudesStore.getGratitudes()
+    // get gratitudes and anticipations from api
+    this.gratitudesStore.getGratitudes(), this.anticipationsStore.getAnticipations()
   }
 }
 </script>
 
 <style scoped>
-/* Jar Styles */
-.jar-wrapper {
+/* position the jar of joy */
+
+.jar-of-joy {
   position: relative;
-  width: 100%;
-  height: auto;
-  overflow: hidden;
-  bottom: -12rem;
-  left: 1rem;
+  max-width: 17rem;
+  min-width: 10rem;
+  min-height: 40vh;
+  background-color: #020b30;
+  border-radius: 2rem;
+  /* overflow: hidden; */
   /* border: 2px solid white; */
 }
 
-.jar-wrapper img {
-  max-width: 100%;
+/* Jar Styles */
+
+.jar-wrapper {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  width: 100%;
   height: auto;
+  transform: scale(1.1);
 }
 
 .jar-image {
   width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
 .jar-wrapper::before {
@@ -75,7 +100,7 @@ export default {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: rgba(2, 11, 48, 0.3);
+  background-color: rgba(2, 11, 48, 0.5);
   border-radius: 4px;
 }
 
@@ -87,6 +112,10 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
+  transform: scale(0.6);
+  left: -1rem;
+  top: 1rem;
+  /* border: 2px solid white; */
 }
 
 .star {
@@ -94,6 +123,6 @@ export default {
   width: 1rem;
   height: auto;
   margin-right: 0.1rem;
-  transform: scale(2);
+  transform: scale(2.5);
 }
 </style>
