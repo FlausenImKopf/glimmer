@@ -34,7 +34,7 @@
 
 <script>
 import { mapStores } from 'pinia'
-import { useAnticipationsStore } from '../stores/anticipations'
+import { useAnticipationsStore } from '../../stores/anticipations'
 
 export default {
   data() {

@@ -22,10 +22,10 @@
 <style scoped>
 .wrapper {
   font-family: 'Antonio';
+  color: #4f65df;
   background-color: rgb(79, 101, 223, 0.2);
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  color: #4f65df;
   padding: 2rem 0.8rem 1rem 0.8rem;
   _padding-bottom: 1rem;
 }
@@ -36,6 +36,14 @@
 img {
   width: 50px;
 }
+.red-star:hover {
+  transform: scale(1.1);
+}
+
+.green-star:hover {
+  transform: scale(1.1);
+}
+
 .overview {
   padding: 0.3rem;
 }

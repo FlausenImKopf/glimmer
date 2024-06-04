@@ -10,7 +10,7 @@
         <img
           v-for="(star, index) in gratitudeStarPositions"
           :key="index"
-          src="../../public/header-star-green.png"
+          src="../../../public/header-star-green.png"
           alt="Star"
           class="star"
           :style="{ top: star.top, left: star.left }"
@@ -18,7 +18,7 @@
         <img
           v-for="(star, index) in anticipationStarPositions"
           :key="index"
-          src="../../public/header-star-red.png"
+          src="../../../public/header-star-red.png"
           alt="Star"
           class="star"
           :style="{ top: star.top, left: star.left }"
@@ -30,8 +30,8 @@
 
 <script>
 import { mapStores } from 'pinia'
-import { useGratitudesStore } from '../stores/gratitudes'
-import { useAnticipationsStore } from '../stores/anticipations'
+import { useGratitudesStore } from '../../stores/gratitudes'
+import { useAnticipationsStore } from '../../stores/anticipations'
 
 export default {
   computed: {
