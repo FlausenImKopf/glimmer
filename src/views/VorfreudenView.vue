@@ -4,6 +4,10 @@
       singleNote="single-anticipation"
       placeholderText="Hier die Vorfreude eingeben und mit Enter speichern."
     />
+    <InfoBlurb
+      adjusting="adjusting-anticipation"
+      text="Info: Speicher deine fertig geschriebene Vorfreude mit Enter"
+    />
     <div class="btn-wrapper">
       <button @click="$router.push('/')">zurück zu Mein Tag</button>
     </div>
@@ -12,9 +16,11 @@
 
 <script>
 import TheVorfreuden from '../components/TheVorfreuden.vue'
+import InfoBlurb from '../components/InfoBlurb.vue'
+
 export default {
-  components: { TheVorfreuden },
-  props: ['singleNote', 'placeholderText']
+  components: { TheVorfreuden, InfoBlurb },
+  props: ['singleNote', 'placeholderText', 'text', 'adjusting']
 }
 </script>
 
@@ -41,6 +47,7 @@ button {
   border: none;
   border-radius: 4px;
   padding: 0.5rem;
+  font-family: monospace;
 }
 
 button:hover {

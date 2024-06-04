@@ -20,14 +20,6 @@
 </template>
 
 <style scoped>
-/* antonio-regular - latin */
-@font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'Antonio';
-  font-style: normal;
-  font-weight: 400;
-  src: url('../../public/antonio-v19-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
 .wrapper {
   font-family: 'Antonio';
   background-color: rgb(79, 101, 223, 0.2);

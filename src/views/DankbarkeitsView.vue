@@ -1,6 +1,10 @@
 <template>
   <main>
     <TheList singleNote="single-gratitude" placeholderText="Ich bin dankbar für..." />
+    <InfoBlurb
+      adjusting="adjusting-gratitude"
+      text="Info: Speicher deine fertig geschriebene Dankbarkeit mit Enter"
+    />
     <div class="btn-wrapper">
       <button @click="$router.push('/')">zurück zu Mein Tag</button>
     </div>
@@ -9,9 +13,11 @@
 
 <script>
 import TheList from '../components/TheList.vue'
+import InfoBlurb from '../components/InfoBlurb.vue'
+
 export default {
-  components: { TheList },
-  props: ['singleNote', 'placeholderText']
+  components: { TheList, InfoBlurb },
+  props: ['singleNote', 'placeholderText', 'text', 'adjusting']
 }
 </script>
 
@@ -25,6 +31,7 @@ main {
   border-radius: 2rem;
   overflow: hidden;
 }
+
 .btn-wrapper {
   position: absolute;
   bottom: 1rem;
@@ -37,6 +44,7 @@ button {
   border: none;
   border-radius: 4px;
   padding: 0.5rem;
+  font-family: monospace;
 }
 
 button:hover {
