@@ -19,7 +19,8 @@ textarea {
 .adjusting-anticipation {
   color: #ec635e;
   background-color: rgba(236, 99, 94, 0.1);
-  left: 4.1rem;
+  width: 77%;
+  left: 2.3rem;
   top: 5rem;
 }
 
