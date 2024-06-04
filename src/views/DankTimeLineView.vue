@@ -193,6 +193,7 @@ h2 {
 .datum {
   color: #81dee4;
   padding-left: 1rem;
+  font-family: monospace;
 }
 
 .datum::before {
