@@ -166,6 +166,7 @@ export default {
       } else {
         store.editGratitude(id, text)
         event.target.blur()
+        // console.log('this line below blur was triggered.')
       }
     },
     resize(event) {
@@ -259,11 +260,11 @@ form::before {
 
 textarea {
   color: #5ce1e6;
-  background-color: rgba(92, 225, 230, 0.1);
   min-height: 5rem;
   padding: 1rem;
   resize: none;
   overflow: hidden;
+  background-color: rgba(92, 225, 230, 0.1);
   border: none;
   border-radius: 4px;
 }
