@@ -97,8 +97,6 @@ ul {
 li {
   position: relative;
   margin-bottom: 1em;
-  left: 1.75rem;
-  right: 1.75rem;
 }
 
 /* h2 {
@@ -118,6 +116,7 @@ textarea {
   color: #ec635e;
   background-color: rgba(236, 99, 94, 0.1);
   min-height: 10px;
+  width: 100%;
   /* padding: 2px; */
   resize: none;
   overflow: hidden;

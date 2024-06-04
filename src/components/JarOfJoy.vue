@@ -69,10 +69,8 @@ export default {
   position: relative;
   max-width: 17rem;
   min-width: 10rem;
-  min-height: 40vh;
   background-color: #020b30;
   border-radius: 2rem;
-  /* overflow: hidden; */
   /* border: 2px solid white; */
 }
 

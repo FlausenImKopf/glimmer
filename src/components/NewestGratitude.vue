@@ -96,8 +96,6 @@ ul {
 li {
   position: relative;
   margin-bottom: 1em;
-  left: 1.75rem;
-  right: 1.75rem;
 }
 
 /* h2 {
@@ -116,6 +114,7 @@ form::before {
 textarea {
   color: #5ce1e6;
   min-height: 10px;
+  width: 100%;
   padding: 1rem;
   resize: none;
   overflow: hidden;
