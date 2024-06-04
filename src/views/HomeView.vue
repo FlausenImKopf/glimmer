@@ -3,14 +3,16 @@
     <h2>Mein Tag</h2>
     <NewestAnticipation />
     <NewestGratitude />
+    <JarOfJoy />
   </main>
 </template>
 
 <script>
 import NewestGratitude from '../components/NewestGratitude.vue'
 import NewestAnticipation from '../components/NewestAnticipation.vue'
+import JarOfJoy from '../components/JarOfJoy.vue'
 export default {
-  components: { NewestGratitude, NewestAnticipation }
+  components: { NewestGratitude, NewestAnticipation, JarOfJoy }
 }
 </script>
 
