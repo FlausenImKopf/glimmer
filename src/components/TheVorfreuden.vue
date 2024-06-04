@@ -1,4 +1,5 @@
 <template>
+  <h2>Meine Vorfreuden heute</h2>
   <!-- List of Anticipations: today's anticipations -->
   <ul>
     <li v-for="anticipation in anticipationsToday" :key="anticipation.id">
@@ -15,6 +16,7 @@
               :id="'ID_' + anticipation.id"
               :name="singleNote"
               ref="textarea"
+              @input="resize"
               @keydown.enter.exact.prevent="handleChangingAnticipation($event, anticipation.id)"
             >
                 <!-- @blur="handleChangingAnticipation($event, anticipation.id)" -->
@@ -72,46 +74,49 @@
       </section>
     </li>
   </ul>
-  <!-- Empty textarea for new anticipation: always displayed below the last entry -->
-  <div class="calender-button-wrapper" v-if="isVisibleButton">
-    <button class="calendar-button" @click="toggleBoth">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="25"
-        height="25"
-        fill="currentColor"
-        class="bi bi-calendar-date"
-        viewBox="0 0 16 16"
-      >
-        <path
-          d="M6.445 11.688V6.354h-.633A13 13 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23"
-        />
-        <path
-          d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"
-        />
-      </svg>
-    </button>
-    <p>
-      Wähle den Tag aus, <br />
-      auf den du dich freust
-    </p>
-  </div>
-  <div class="calendar-wrapper" v-if="isVisibleCalendar">
-    <div class="calendar">
-      <VDatePicker v-model="selectedDate" mode="selectedDate" @dayclick="toggleVisibility()" />
+  <!-- Calendar: -->
+  <div class="add-anticipation-wrapper">
+    <div class="calender-button-wrapper" v-if="isVisibleButton">
+      <button class="calendar-button" @click="toggleBoth">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="25"
+          height="25"
+          fill="currentColor"
+          class="bi bi-calendar-date"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M6.445 11.688V6.354h-.633A13 13 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23"
+          />
+          <path
+            d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"
+          />
+        </svg>
+      </button>
+      <p>
+        Wähle den Tag aus, <br />
+        auf den du dich freust
+      </p>
     </div>
-  </div>
-  <div v-if="!isVisibleButton && !isVisibleCalendar">
-    <form id="add-new-anticipation-for-today-here" name="add-new-anticipation-for-today-here">
-      <label for="add-new-anticipation-for-today-here">{{ datum }}</label>
-      <textarea
-        v-model="text"
-        placeholder="Heute freue ich mich auf..."
-        @input="resize($event)"
-        @keydown.enter.exact.prevent="handleNewAnticipation()"
-        @blur="handleNewAnticipation()"
-      ></textarea>
-    </form>
+    <div class="calendar-wrapper" v-if="isVisibleCalendar">
+      <div class="calendar">
+        <VDatePicker v-model="selectedDate" mode="selectedDate" @dayclick="toggleVisibility()" />
+      </div>
+    </div>
+    <!-- Empty textarea for new anticipation: displayed below the last entry when a date is picked-->
+    <div v-if="!isVisibleButton && !isVisibleCalendar">
+      <form id="add-new-anticipation-for-today-here" name="add-new-anticipation-for-today-here">
+        <label for="add-new-anticipation-for-today-here">{{ datum }}</label>
+        <textarea
+          v-model="text"
+          :placeholder="placeholderText"
+          @input="resize($event)"
+          @keydown.enter.exact.prevent="handleNewAnticipation()"
+          @blur="handleNewAnticipation()"
+        ></textarea>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -264,8 +269,16 @@ export default {
 </script>
 
 <style scoped>
+h2 {
+  color: #ec635e;
+  margin-top: 2rem;
+  margin-left: 3rem;
+  margin-bottom: 1rem;
+  font-family: 'Antonio';
+}
+
 ul {
-  color: white;
+  color: #ec635e;
   list-style-type: none;
   padding-left: 3.5rem;
   padding-top: 2rem;
@@ -274,35 +287,54 @@ ul {
 li {
   position: relative;
   padding-left: 1.5em;
-  margin-bottom: 1em;
+  margin-bottom: 1.4rem;
   margin-right: 2rem;
+}
+
+label {
+  color: #ec635e;
+  background-color: rgb(236, 99, 94, 0.2);
+  border-radius: 4px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.05rem;
+  padding-bottom: 0.05rem;
 }
 
 li::before {
   content: url(../../public/header-star-red.png);
   position: absolute;
-  left: -10.5rem;
-  top: -8rem;
+  left: -9.4rem;
+  top: -9rem;
   transform: scale(0.13);
 }
 
 textarea {
-  background-color: darkblue;
-  padding-top: 1rem;
-  color: white;
-  width: 200px;
-  min-height: 10px;
-  padding: 2px;
+  color: #ec635e;
+  background-color: rgba(236, 99, 94, 0.1);
+  position: relative;
+  left: -0.9rem;
+  min-height: 5rem;
   resize: none;
   overflow: hidden;
-  background-color: transparent;
-  border: none;
   border-radius: 4px;
+  padding: 1rem;
+  box-shadow: 0px -25px 0px 0px rgba(236, 99, 94, 0.1);
+  /* margin-bottom: 2rem; */
+  border: none;
   /* border: 2px solid white; */
 }
 
-div {
-  color: white;
+textarea:hover {
+  background-color: rgba(236, 99, 94, 0.4);
+  box-shadow: 0px -25px 0px 0px rgba(236, 99, 94, 0.4);
+}
+
+textarea:focus {
+  background-color: rgba(236, 99, 94, 0.4);
+  box-shadow: 0px -25px 0px 0px rgba(236, 99, 94, 0.4);
+  border: none;
+  outline: none;
 }
 
 .calendar-button {
@@ -310,13 +342,33 @@ div {
   color: #ec635e;
   border: none;
   /* margin: 0; */
-  margin-left: 3rem;
+  /* margin-left: 3rem; */
   padding: 0;
 }
 
-.calender-button-wrapper {
-  color: white;
+.add-anticipation-wrapper {
+  position: relative;
   display: flex;
+  justify-content: center;
+}
+
+.calender-button-wrapper {
+  color: #ec635e;
+  background-color: rgba(236, 99, 94, 0.1);
+  display: flex;
+  /* max-width: 80%; */
+  /* padding: 1.7rem; */
+  padding: 1rem;
+  position: absolute;
+  border-radius: 4px;
+}
+
+.calender-button-wrapper:hover {
+  background-color: rgba(236, 99, 94, 0.4);
+}
+
+.calender-button-wrapper:focus {
+  background-color: rgba(236, 99, 94, 0.4);
 }
 
 p {
@@ -324,7 +376,7 @@ p {
 }
 .calendar {
   position: absolute;
-  left: 2rem;
+  left: -8rem;
   z-index: 1;
 }
 
@@ -334,6 +386,10 @@ p {
 
 #add-new-anticipation-for-today-here {
   margin-left: 5rem;
+}
+
+::placeholder {
+  color: rgba(236, 99, 94, 0.4);
 }
 /* section {
     display: flex;
