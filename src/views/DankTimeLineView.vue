@@ -98,7 +98,6 @@ export default {
       let danks = Object.values(this.dankbarkeiten).sort(
         (dank1, dank2) => dank2.createdAt - dank1.createdAt
       )
-      console.log(danks)
       //2. Schritt - Dankbarkeiten nach Datum gruppieren und mit Datum als Key im Objekt speichern. Hier wird danks zum Object
       danks = this.splitSortedDankbarkeiten(danks)
 
