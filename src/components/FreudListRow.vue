@@ -52,8 +52,8 @@ export default {
         this.computedMarginLeft = '0'
         return
       }
-      let createdAt = this.vorfreude.createdAt
-      let enddatum = this.vorfreude.date
+      let createdAt = new Date(this.vorfreude.createdAt)
+      let enddatum = new Date(this.vorfreude.date)
       let currentDate = this.currentDate
       let vortag = new Date(currentDate)
       vortag.setDate(vortag.getDate() - 1)

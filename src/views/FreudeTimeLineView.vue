@@ -25,10 +25,20 @@
 
 <script>
 import FreudListRow from '../components/FreudListRow.vue'
+import { useAnticipationsStore } from '../stores/anticipations'
 import { v4 as uuidv4 } from 'uuid'
 export default {
   components: {
     FreudListRow
+  },
+  created() {
+    useAnticipationsStore().getAnticipations()
+  },
+
+  computed: {
+    vorfreuden() {
+      return useAnticipationsStore().anticipations
+    }
   },
 
   methods: {
@@ -60,10 +70,10 @@ export default {
       let result = []
       for (let vorfreude of this.vorfreuden) {
         if (
-          (this.istKleiner(vorfreude.createdAt, this.getFollowingDay()) ||
-            this.istGleich(vorfreude.createdAt, this.getFollowingDay())) &&
-          (this.istGroesser(vorfreude.date, this.getPreviousDay()) ||
-            this.istGleich(vorfreude.date, this.getPreviousDay()))
+          (this.istKleiner(new Date(vorfreude.createdAt), this.getFollowingDay()) ||
+            this.istGleich(new Date(vorfreude.createdAt), this.getFollowingDay())) &&
+          (this.istGroesser(new Date(vorfreude.date), this.getPreviousDay()) ||
+            this.istGleich(new Date(vorfreude.date), this.getPreviousDay()))
         ) {
           result.push(vorfreude)
         }
@@ -99,104 +109,104 @@ export default {
 
   data() {
     return {
-      currentDate: new Date(),
-      vorfreuden: [
-        //Eintagsfreuden
-        {
-          id: uuidv4(),
-          text: 'ich freue mich auf die Pause!',
-          createdAt: new Date(2024, 4, 23, 12, 58),
-          date: new Date(2024, 4, 23, 0, 0),
-          userId: 1
-        },
-        {
-          id: uuidv4(),
-          text: 'ich freue mich auf das Treffen heute Abend!',
-          createdAt: new Date(2024, 4, 24, 12, 58),
-          date: new Date(2024, 4, 24, 0, 0),
-          userId: 1
-        },
-        {
-          id: uuidv4(),
-          text: 'ich freue mich auf das Abendessen mit der Familie!',
-          createdAt: new Date(2024, 4, 25, 12, 58),
-          date: new Date(2024, 4, 25, 0, 0),
-          userId: 1
-        },
-        //Zweitagsfreuden
-        {
-          id: uuidv4(),
-          text: 'ich freue mich auf den Ausflug!',
-          createdAt: new Date(2024, 5, 5, 12, 58),
-          date: new Date(2024, 5, 6, 0, 0),
-          userId: 1
-        },
-        {
-          id: uuidv4(),
-          text: 'ich freue mich auf die Präsentation der App!',
-          createdAt: new Date(2024, 5, 1, 12, 58),
-          date: new Date(2024, 5, 2, 0, 0),
-          userId: 1
-        },
-        //Dreitagsfreuden
-        {
-          id: uuidv4(),
-          text: 'ich freue mich auf das Wochenende!',
-          createdAt: new Date(2024, 4, 29, 12, 58),
-          date: new Date(2024, 4, 31, 0, 0),
-          userId: 1
-        },
-        //Mehrtagsfreuden
-        {
-          id: uuidv4(),
-          text: 'ich freue mich auf den Urlaub!',
-          createdAt: new Date(2024, 4, 20, 12, 58),
-          date: new Date(2024, 5, 23, 0, 0),
-          userId: 1
-        },
-        {
-          id: uuidv4(),
-          text: 'ich freue mich auf den Sommer!',
-          createdAt: new Date(2024, 4, 20, 12, 58),
-          date: new Date(2024, 6, 24, 0, 0),
-          userId: 1
-        },
-        {
-          id: uuidv4(),
-          text: 'ich freue mich auf den Besuch!',
-          createdAt: new Date(2024, 4, 21, 12, 58),
-          date: new Date(2024, 4, 31, 0, 0),
-          userId: 1
-        },
-        {
-          id: uuidv4(),
-          text: 'ich freue mich auf die Reise!',
-          createdAt: new Date(2024, 5, 1, 12, 58),
-          date: new Date(2024, 6, 28, 0, 0),
-          userId: 1
-        },
-        {
-          id: uuidv4(),
-          text: 'ich freue mich auf das Konzert!',
-          createdAt: new Date(2024, 5, 3, 12, 58),
-          date: new Date(2024, 5, 28, 0, 0),
-          userId: 1
-        },
-        {
-          id: uuidv4(),
-          text: 'ich freue mich auf das Wiedersehen mit meiner Schulfreundin!',
-          createdAt: new Date(2024, 5, 5, 12, 58),
-          date: new Date(2024, 5, 10, 0, 0),
-          userId: 1
-        },
-        {
-          id: uuidv4(),
-          text: 'ich freue mich auf das Festival!',
-          createdAt: new Date(2024, 4, 20, 12, 58),
-          date: new Date(2024, 7, 31, 0, 0),
-          userId: 1
-        }
-      ]
+      currentDate: new Date()
+      // vorfreuden: [
+      //   //Eintagsfreuden
+      //   {
+      //     id: uuidv4(),
+      //     text: 'ich freue mich auf die Pause!',
+      //     createdAt: new Date(2024, 4, 23, 12, 58),
+      //     date: new Date(2024, 4, 23, 0, 0),
+      //     userId: 1
+      //   },
+      //   {
+      //     id: uuidv4(),
+      //     text: 'ich freue mich auf das Treffen heute Abend!',
+      //     createdAt: new Date(2024, 4, 24, 12, 58),
+      //     date: new Date(2024, 4, 24, 0, 0),
+      //     userId: 1
+      //   },
+      //   {
+      //     id: uuidv4(),
+      //     text: 'ich freue mich auf das Abendessen mit der Familie!',
+      //     createdAt: new Date(2024, 4, 25, 12, 58),
+      //     date: new Date(2024, 4, 25, 0, 0),
+      //     userId: 1
+      //   },
+      //   //Zweitagsfreuden
+      //   {
+      //     id: uuidv4(),
+      //     text: 'ich freue mich auf den Ausflug!',
+      //     createdAt: new Date(2024, 5, 5, 12, 58),
+      //     date: new Date(2024, 5, 6, 0, 0),
+      //     userId: 1
+      //   },
+      //   {
+      //     id: uuidv4(),
+      //     text: 'ich freue mich auf die Präsentation der App!',
+      //     createdAt: new Date(2024, 5, 1, 12, 58),
+      //     date: new Date(2024, 5, 2, 0, 0),
+      //     userId: 1
+      //   },
+      //   //Dreitagsfreuden
+      //   {
+      //     id: uuidv4(),
+      //     text: 'ich freue mich auf das Wochenende!',
+      //     createdAt: new Date(2024, 4, 29, 12, 58),
+      //     date: new Date(2024, 4, 31, 0, 0),
+      //     userId: 1
+      //   },
+      //   //Mehrtagsfreuden
+      //   {
+      //     id: uuidv4(),
+      //     text: 'ich freue mich auf den Urlaub!',
+      //     createdAt: new Date(2024, 4, 20, 12, 58),
+      //     date: new Date(2024, 5, 23, 0, 0),
+      //     userId: 1
+      //   },
+      //   {
+      //     id: uuidv4(),
+      //     text: 'ich freue mich auf den Sommer!',
+      //     createdAt: new Date(2024, 4, 20, 12, 58),
+      //     date: new Date(2024, 6, 24, 0, 0),
+      //     userId: 1
+      //   },
+      //   {
+      //     id: uuidv4(),
+      //     text: 'ich freue mich auf den Besuch!',
+      //     createdAt: new Date(2024, 4, 21, 12, 58),
+      //     date: new Date(2024, 4, 31, 0, 0),
+      //     userId: 1
+      //   },
+      //   {
+      //     id: uuidv4(),
+      //     text: 'ich freue mich auf die Reise!',
+      //     createdAt: new Date(2024, 5, 1, 12, 58),
+      //     date: new Date(2024, 6, 28, 0, 0),
+      //     userId: 1
+      //   },
+      //   {
+      //     id: uuidv4(),
+      //     text: 'ich freue mich auf das Konzert!',
+      //     createdAt: new Date(2024, 5, 3, 12, 58),
+      //     date: new Date(2024, 5, 28, 0, 0),
+      //     userId: 1
+      //   },
+      //   {
+      //     id: uuidv4(),
+      //     text: 'ich freue mich auf das Wiedersehen mit meiner Schulfreundin!',
+      //     createdAt: new Date(2024, 5, 5, 12, 58),
+      //     date: new Date(2024, 5, 10, 0, 0),
+      //     userId: 1
+      //   },
+      //   {
+      //     id: uuidv4(),
+      //     text: 'ich freue mich auf das Festival!',
+      //     createdAt: new Date(2024, 4, 20, 12, 58),
+      //     date: new Date(2024, 7, 31, 0, 0),
+      //     userId: 1
+      //   }
+      // ]
     }
   }
 }
