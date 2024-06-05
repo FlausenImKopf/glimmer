@@ -1,5 +1,5 @@
 <template>
-  <textarea :class="adjusting" :value="text"></textarea>
+  <textarea disabled :class="adjusting" :value="text"></textarea>
 </template>
 
 <style scoped>

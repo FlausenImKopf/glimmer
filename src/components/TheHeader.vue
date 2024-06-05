@@ -23,7 +23,7 @@
 .wrapper {
   font-family: 'Antonio';
   color: #4f65df;
-  background-color: rgb(79, 101, 223, 0.2);
+  background-color: rgba(79, 101, 223, 0.1);
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   padding: 2rem 0.8rem 1rem 0.8rem;
