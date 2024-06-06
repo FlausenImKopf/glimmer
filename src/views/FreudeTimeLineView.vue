@@ -26,6 +26,7 @@
 <script>
 import FreudListRow from '../components/FreudListRow.vue'
 import { useAnticipationsStore } from '../stores/anticipations'
+
 export default {
   components: {
     FreudListRow

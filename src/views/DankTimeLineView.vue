@@ -64,6 +64,7 @@
 <script>
 import DankListRow from '../components/TimeLineRow.vue'
 import { useGratitudesStore } from '../stores/gratitudes'
+
 export default {
   components: {
     DankListRow

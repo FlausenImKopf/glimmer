@@ -18,7 +18,7 @@ const app = createApp(App)
 
 app.use(pinia)
 app.use(router)
-// Use plugin with optional defaults
+
 app.use(VCalendar, {})
 
 app.mount('#app')

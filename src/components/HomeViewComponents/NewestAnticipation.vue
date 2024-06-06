@@ -5,8 +5,6 @@
         :id="'show-one-of-todays-anticipations-with-ID: ' + anticipation.id"
         :name="'show-one-of-todays-anticipations-with-ID :' + anticipation.id"
       >
-        <!-- TODO: keine headlines in form-Elementen wegen accessibility -->
-        <!-- <h2>Vorfreuden</h2> -->
         <label :for="'ID_' + anticipation.id">
           <textarea
             :value="anticipation.text"
@@ -133,5 +131,3 @@ textarea:hover {
   color: rgba(236, 99, 94, 0.4);
 }
 </style>
-
-<!-- TODO: besseres Layout der Textfelder -->

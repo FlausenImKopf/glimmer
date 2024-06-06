@@ -12,6 +12,7 @@
 import NewestGratitude from '../components/HomeViewComponents/NewestGratitude.vue'
 import NewestAnticipation from '../components/HomeViewComponents/NewestAnticipation.vue'
 import JarOfJoy from '../components/HomeViewComponents/JarOfJoy.vue'
+
 export default {
   components: { NewestGratitude, NewestAnticipation, JarOfJoy }
 }

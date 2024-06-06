@@ -16,6 +16,8 @@ Our App is designed to help you fight negativity bias (our brains seem hard-wire
 
 ## Project Setup
 
+> NOTE: To run this project, you need a backend which is **not yet available publicly**.
+
 ```shell
 npm install
 ```

@@ -103,7 +103,6 @@ export default {
         return
       } else {
         const createdAt = Date.now()
-        // TODO: add calendar functionality here:
         const date = this.selectedDate
         console.log(date)
         const userId = 'c2dfc86e-53da-4404-8acd-7497853b8496'
