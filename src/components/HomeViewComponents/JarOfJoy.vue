@@ -43,7 +43,7 @@ export default {
       }))
     },
     anticipationStarPositions() {
-      return this.gratitudesStore.gratitudes.map(() => ({
+      return this.anticipationsStore.anticipations.map(() => ({
         top: this.generateStarPosition(),
         left: this.generateStarPosition()
       }))
@@ -54,7 +54,6 @@ export default {
       return Math.random() * 100 + '%'
     }
   },
-
   mounted() {
     // get gratitudes and anticipations from api
     this.gratitudesStore.getGratitudes(), this.anticipationsStore.getAnticipations()
