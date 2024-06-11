@@ -1,6 +1,6 @@
 <template>
   <div class="mainview">
-    <TheHeader />
+    <AppHeader />
     <RouterView />
   </div>
 </template>
@@ -22,9 +22,9 @@ html {
 </style>
 
 <script>
-import TheHeader from './components/TheHeader.vue'
+import AppHeader from './components/AppHeader.vue'
 
 export default {
-  components: { TheHeader }
+  components: { AppHeader }
 }
 </script>

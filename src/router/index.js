@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import VorfreudenView from '../views/VorfreudenView.vue'
+import VorfreudenView from '../views/AddAnticipationsView.vue'
 import HomeView from '../views/HomeView.vue'
-import DankTimeLineView from '../views/DankTimeLineView.vue'
-import FreudeTimeLineView from '../views/FreudeTimeLineView.vue'
+import DankTimeLineView from '../views/GratitudeTimelineView.vue'
+import FreudeTimeLineView from '../views/AnticipationTimelineView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -23,7 +23,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (DankbarkeitsView.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/DankbarkeitsView.vue')
+      component: () => import('../views/AddGratitudesView.vue')
     },
     {
       path: '/danktimeline',
