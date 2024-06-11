@@ -1,5 +1,5 @@
 <template>
-  <article class="vorfreuden">
+  <article class="anticipations">
     <h2 class="overview">Vorfreuden</h2>
     <section class="horizontal-list">
       <div class="data-container" @mousedown="currentDate = getPreviousDay()">
@@ -14,9 +14,9 @@
     </section>
     <section class="list">
       <AntiTimelineList
-        v-for="freude in getVorfreuden()"
-        :key="freude.id"
-        :vorfreude="freude"
+        v-for="anticipation in getSortedAnticipations()"
+        :key="anticipation.id"
+        :anticipation="anticipation"
         :currentDate="currentDate"
       />
     </section>
@@ -41,7 +41,7 @@ export default {
   },
 
   computed: {
-    vorfreuden() {
+    anticipations() {
       return useAnticipationsStore().anticipations
     }
   },
@@ -71,14 +71,14 @@ export default {
       return followingDay
     },
 
-    getVorfreuden() {
+    getSortedAnticipations() {
       let result = []
-      for (let vorfreude of this.vorfreuden) {
+      for (let vorfreude of this.anticipations) {
         if (
-          (this.istKleiner(new Date(vorfreude.createdAt), this.getFollowingDay()) ||
-            this.istGleich(new Date(vorfreude.createdAt), this.getFollowingDay())) &&
-          (this.istGroesser(new Date(vorfreude.date), this.getPreviousDay()) ||
-            this.istGleich(new Date(vorfreude.date), this.getPreviousDay()))
+          (this.dateIsSmaller(new Date(vorfreude.createdAt), this.getFollowingDay()) ||
+            this.dateIsEqual(new Date(vorfreude.createdAt), this.getFollowingDay())) &&
+          (this.dateIsBigger(new Date(vorfreude.date), this.getPreviousDay()) ||
+            this.dateIsEqual(new Date(vorfreude.date), this.getPreviousDay()))
         ) {
           result.push(vorfreude)
         }
@@ -86,14 +86,14 @@ export default {
       return result
     },
 
-    istGleich(firstDate, secondDate) {
+    dateIsEqual(firstDate, secondDate) {
       return (
         firstDate.getFullYear() == secondDate.getFullYear() &&
         firstDate.getMonth() == secondDate.getMonth() &&
         firstDate.getDate() == secondDate.getDate()
       )
     },
-    istKleiner(firstDate, secondDate) {
+    dateIsSmaller(firstDate, secondDate) {
       if (firstDate.getFullYear() < secondDate.getFullYear()) {
         return true
       } else if (firstDate.getFullYear() == secondDate.getFullYear()) {
@@ -107,21 +107,14 @@ export default {
       }
       return false
     },
-    istGroesser(firstDate, secondDate) {
-      return !this.istKleiner(firstDate, secondDate) && !this.istGleich(firstDate, secondDate)
+    dateIsBigger(firstDate, secondDate) {
+      return !this.dateIsSmaller(firstDate, secondDate) && !this.dateIsEqual(firstDate, secondDate)
     }
   }
 }
 </script>
 
 <style scoped>
-@font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'Antonio';
-  font-style: normal;
-  font-weight: 400;
-  src: url('../../public/antonio-v19-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
 .overview {
   font-family: 'Antonio';
   padding: 1rem;
