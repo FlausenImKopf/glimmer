@@ -7,9 +7,7 @@
       adjusting="adjusting-gratitude"
       text="Info: Speicher deine fertig geschriebene Dankbarkeit mit Enter"
     />
-    <div class="btn-wrapper">
-      <button @click="$router.push('/')">zurück zu Mein Tag</button>
-    </div>
+    <ReturnHomeBtn adjusting="adjusting-gratitude" />
   </main>
 </template>
 
@@ -17,9 +15,10 @@
 import GratitudesList from '../components/AddGratitudesComponents/GratitudesList.vue'
 import InfoBlurb from '../components/InfoBlurb.vue'
 import AddText from '../components/AddGratitudesComponents/AddText.vue'
+import ReturnHomeBtn from '../components/ReturnHomeBtn.vue'
 
 export default {
-  components: { GratitudesList, InfoBlurb, AddText },
+  components: { GratitudesList, InfoBlurb, AddText, ReturnHomeBtn },
   props: ['singleNote', 'placeholderText', 'text', 'adjusting']
 }
 </script>
@@ -45,23 +44,10 @@ h2 {
   text-align: center;
 }
 
+/* Positioning for return home button */
 .btn-wrapper {
   position: absolute;
   bottom: 1rem;
   right: 1rem;
-}
-
-button {
-  color: #5ce1e6;
-  background-color: rgb(92, 225, 230, 0.1);
-  border: none;
-  border-radius: 4px;
-  padding: 0.5rem;
-  font-family: monospace;
-}
-
-button:hover {
-  background-color: rgb(92, 225, 230, 0.4);
-  cursor: pointer;
 }
 </style>

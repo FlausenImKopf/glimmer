@@ -1,35 +1,40 @@
 <template>
-  <article class="anticipations">
-    <h2 class="overview">Vorfreuden</h2>
-    <section class="horizontal-list">
-      <div class="data-container" @mousedown="currentDate = getPreviousDay()">
-        <p class="data">{{ '<' + getDateWithoutTime(getPreviousDay()) }}</p>
-      </div>
-      <div class="data-container">
-        <p class="data" style="font-size: large">{{ getDateWithoutTime(currentDate) }}</p>
-      </div>
-      <div class="data-container" @mousedown="currentDate = getFollowingDay()">
-        <p class="data">{{ getDateWithoutTime(getFollowingDay()) + '>' }}</p>
-      </div>
-    </section>
-    <section class="list">
-      <AntiTimelineList
-        v-for="anticipation in getSortedAnticipations()"
-        :key="anticipation.id"
-        :anticipation="anticipation"
-        :currentDate="currentDate"
-      />
-    </section>
-  </article>
+  <main>
+    <article class="anticipations">
+      <h2 class="overview">Vorfreuden</h2>
+      <section class="horizontal-list">
+        <div class="data-container" @mousedown="currentDate = getPreviousDay()">
+          <p class="data">{{ '<' + getDateWithoutTime(getPreviousDay()) }}</p>
+        </div>
+        <div class="data-container">
+          <p class="data" style="font-size: large">{{ getDateWithoutTime(currentDate) }}</p>
+        </div>
+        <div class="data-container" @mousedown="currentDate = getFollowingDay()">
+          <p class="data">{{ getDateWithoutTime(getFollowingDay()) + '>' }}</p>
+        </div>
+      </section>
+      <section class="list">
+        <AntiTimelineList
+          v-for="anticipation in getSortedAnticipations()"
+          :key="anticipation.id"
+          :anticipation="anticipation"
+          :currentDate="currentDate"
+        />
+      </section>
+    </article>
+    <ReturnHomeBtn adjusting="adjusting-anticipation" />
+  </main>
 </template>
 
 <script>
 import AntiTimelineList from '../components/AntiTimelineComponents/AntiTimelineList.vue'
+import ReturnHomeBtn from '../components/ReturnHomeBtn.vue'
 import { useAnticipationsStore } from '../stores/anticipations'
 
 export default {
   components: {
-    AntiTimelineList
+    AntiTimelineList,
+    ReturnHomeBtn
   },
   created() {
     useAnticipationsStore().getAnticipations()
@@ -149,5 +154,24 @@ export default {
   height: 0.8rem;
   background-color: #ec635e;
   border-radius: 50%;
+}
+
+/* Container to position return home button relative to*/
+main {
+  position: relative;
+  /* max-width: 20rem;
+  min-width: 20rem; */
+  min-height: 89vh;
+  background-color: #020b30;
+  border-radius: 2rem;
+  overflow: hidden;
+  /* padding: 0.5rem; */
+}
+
+/* Positioning for return home button */
+.btn-wrapper {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
 }
 </style>
