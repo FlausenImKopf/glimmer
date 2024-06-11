@@ -10,9 +10,7 @@
       adjusting="adjusting-anticipation"
       text="Info: Speicher deine fertig geschriebene Vorfreude mit Enter"
     />
-    <div class="btn-wrapper">
-      <button @click="$router.push('/')">zurück zu Mein Tag</button>
-    </div>
+    <ReturnHomeBtn adjusting="adjusting-anticipation" />
   </main>
 </template>
 
@@ -20,9 +18,10 @@
 import AnticipationsList from '../components/AddAnticipationsComponents/AnticipationsList.vue'
 import InfoBlurb from '../components/InfoBlurb.vue'
 import AddCalendar from '../components/AddAnticipationsComponents/AddCalendar.vue'
+import ReturnHomeBtn from '../components/ReturnHomeBtn.vue'
 
 export default {
-  components: { AnticipationsList, InfoBlurb, AddCalendar },
+  components: { AnticipationsList, InfoBlurb, AddCalendar, ReturnHomeBtn },
   props: ['singleNote', 'placeholderText', 'text', 'adjusting']
 }
 </script>
@@ -50,23 +49,10 @@ h2 {
   margin-bottom: 1rem;
 }
 
+/* Positioning for return home button */
 .btn-wrapper {
   position: absolute;
   bottom: 1rem;
   right: 1rem;
-}
-
-button {
-  color: #ec635e;
-  background-color: rgb(236, 99, 94, 0.1);
-  border: none;
-  border-radius: 4px;
-  padding: 0.5rem;
-  font-family: monospace;
-}
-
-button:hover {
-  background-color: rgb(236, 99, 94, 0.4);
-  cursor: pointer;
 }
 </style>
