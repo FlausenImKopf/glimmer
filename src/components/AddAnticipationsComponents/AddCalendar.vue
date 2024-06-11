@@ -1,8 +1,8 @@
 <template>
   <!-- Calendar: -->
   <div class="add-anticipation-wrapper">
-    <div class="calender-button-wrapper" v-if="isVisibleButton">
-      <button class="calendar-button" @click="toggleBoth">
+    <div class="calender-button-wrapper" v-if="isVisibleButton" @click="toggleBoth">
+      <button class="calendar-button">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="25"
@@ -69,7 +69,7 @@ export default {
     displayDate() {
       const date = this.selectedDate
       if (date !== null) {
-        // Create a Date object from the selectedDate
+        // Create a date object from the selectedDate
         const dateObj = new Date(date)
 
         // Options for formatting the date
@@ -171,6 +171,10 @@ textarea:focus {
   justify-content: center;
 }
 
+.add-anticipation-wrapper:hover {
+  cursor: pointer;
+}
+
 .calender-button-wrapper {
   color: #ec635e;
   background-color: rgba(236, 99, 94, 0.1);
@@ -188,10 +192,6 @@ textarea:focus {
   box-shadow: 0px -10px 0px 0px rgba(236, 99, 94, 0.4);
 }
 
-.calender-button-wrapper:focus {
-  background-color: rgba(236, 99, 94, 0.4);
-}
-
 .calendar-button {
   background-color: transparent;
   color: #ec635e;
@@ -203,10 +203,15 @@ p {
   padding-left: 1rem;
   font-family: monospace;
 }
+
 .calendar {
   position: absolute;
   left: -8rem;
   z-index: 1;
+}
+
+button:hover {
+  cursor: pointer;
 }
 
 .calendar-wrapper {

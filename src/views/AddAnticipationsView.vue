@@ -67,5 +67,6 @@ button {
 
 button:hover {
   background-color: rgb(236, 99, 94, 0.4);
+  cursor: pointer;
 }
 </style>
