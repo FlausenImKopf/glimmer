@@ -38,10 +38,17 @@ img {
 }
 .red-star:hover {
   transform: scale(1.1);
+  cursor: pointer;
 }
 
 .green-star:hover {
   transform: scale(1.1);
+  cursor: pointer;
+}
+
+h1:hover {
+  transform: scale(1.05);
+  cursor: pointer;
 }
 
 .overview {

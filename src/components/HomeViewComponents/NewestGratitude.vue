@@ -118,6 +118,7 @@ textarea {
 
 textarea:hover {
   background-color: rgba(92, 225, 230, 0.4);
+  cursor: pointer;
 }
 
 ::placeholder {

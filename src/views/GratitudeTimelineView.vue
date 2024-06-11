@@ -164,6 +164,10 @@ h2 {
   margin: 0;
   padding: 0;
 }
+
+.all-view-button:hover {
+  cursor: pointer;
+}
 .calendar-button {
   background-color: transparent;
   color: #81dee4;
@@ -171,6 +175,11 @@ h2 {
   margin: 0;
   padding: 0;
 }
+
+.calendar-button:hover {
+  cursor: pointer;
+}
+
 .list {
   border-left: 2px #4f65df solid;
 }
