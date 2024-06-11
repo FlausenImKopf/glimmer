@@ -32,7 +32,7 @@
     <!-- Empty textarea for new anticipation: displayed below the last entry when a date is picked-->
     <div v-if="!isVisibleButton && !isVisibleCalendar">
       <form id="add-new-anticipation-for-today-here" name="add-new-anticipation-for-today-here">
-        <label for="add-new-anticipation-for-today-here">{{ datum }}</label>
+        <label for="add-new-anticipation-for-today-here">{{ displayDate }}</label>
         <textarea
           class="new-textarea"
           v-model="text"
@@ -66,7 +66,7 @@ export default {
   },
   computed: {
     ...mapStores(useAnticipationsStore),
-    datum() {
+    displayDate() {
       const date = this.selectedDate
       if (date !== null) {
         // Create a Date object from the selectedDate

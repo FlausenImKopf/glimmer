@@ -4,12 +4,12 @@
       <img
         class="red-star"
         src="../../public/header-star-red.png"
-        @click="$router.push('/freudetimeline')"
+        @click="$router.push('/anticipation-timeline')"
       />
       <img
         class="green-star"
         src="../../public/header-star-green.png"
-        @click="$router.push('/danktimeline')"
+        @click="$router.push('/gratitude-timeline')"
       />
     </div>
     <div class="overview" @click="$router.push('/')">

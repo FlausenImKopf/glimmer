@@ -31,12 +31,6 @@ main {
   flex-grow: 1;
 }
 
-JarOfJoy {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
-
 h2 {
   color: #4f65df;
   font-family: 'Antonio';

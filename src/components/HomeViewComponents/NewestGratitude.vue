@@ -11,7 +11,7 @@
             placeholder="Heute bin ich dankbar für..."
             :id="'ID_' + gratitude.id"
             ref="textarea"
-            @click="$router.push('/dankbarkeiten')"
+            @click="$router.push('/gratitudes')"
           ></textarea>
         </label>
       </form>
@@ -22,7 +22,7 @@
         <label>
           <textarea
             placeholder="Heute bin ich dankbar für..."
-            @click="$router.push('/dankbarkeiten')"
+            @click="$router.push('/gratitudes')"
           ></textarea>
         </label>
       </form>

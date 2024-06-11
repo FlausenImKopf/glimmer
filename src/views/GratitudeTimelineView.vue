@@ -1,5 +1,5 @@
 <template>
-  <article class="danklist">
+  <article class="gratitudes-list">
     <section class="overview">
       <button class="all-view-button" @click="resetSelectedDay()">
         <svg
@@ -45,16 +45,16 @@
 
     <section class="list">
       <section
-        v-for="(dankbarkeitenEinesTages, datum) in getDankbarkeiten()"
-        :key="datum"
+        v-for="(gratitudesInADay, date) in getSortedGratitudes()"
+        :key="date"
         class="section"
       >
-        <label class="datum">{{ datum }}</label>
+        <label class="date">{{ date }}</label>
         <GratiTimelineList
-          class="danklist"
-          v-for="dank in dankbarkeitenEinesTages"
-          :key="dank.id"
-          :note="dank"
+          class="gratitudes-list"
+          v-for="gratitude in gratitudesInADay"
+          :key="gratitude.id"
+          :note="gratitude"
         />
       </section>
     </section>
@@ -74,7 +74,7 @@ export default {
     useGratitudesStore().getGratitudes()
   },
   computed: {
-    dankbarkeiten() {
+    gratitudes() {
       return useGratitudesStore().gratitudes
     }
   },
@@ -94,34 +94,34 @@ export default {
       this.isVisibleCalendar = false
     },
 
-    getDankbarkeiten() {
-      //1. Schritt - nach Datum sortieren. Hier ist danks ein Array
-      let danks = Object.values(this.dankbarkeiten).sort(
-        (dank1, dank2) => dank2.createdAt - dank1.createdAt
+    getSortedGratitudes() {
+      //1. Step - sort by day. "gratitudes" is an array.
+      let gratitudes = Object.values(this.gratitudes).sort(
+        (gratitude1, gratitude2) => gratitude2.createdAt - gratitude1.createdAt
       )
-      //2. Schritt - Dankbarkeiten nach Datum gruppieren und mit Datum als Key im Objekt speichern. Hier wird danks zum Object
-      danks = this.splitSortedDankbarkeiten(danks)
+      //2. Step - group gratitudes by date and safe them with their date as key. "Gratitudes" is now an object.
+      gratitudes = this.splitSortedGratitudes(gratitudes)
 
-      //3. Schritt - entweder Einen Tag mit dazugehörigen Dankbarkeiten herausgeben, oder alle.
+      //3. Step - return the gratitudes for each day
       if (this.selectedDate != null) {
         let result = {}
         result[this.getDateWithoutTime(this.selectedDate)] =
-          danks[this.getDateWithoutTime(this.selectedDate)]
+          gratitudes[this.getDateWithoutTime(this.selectedDate)]
         return result
       }
-      return danks
+      return gratitudes
     },
 
-    splitSortedDankbarkeiten(danks) {
+    splitSortedGratitudes(gratitudes) {
       let result = {}
-      result[this.getDateWithoutTime(danks[0].createdAt)] = [danks[0]]
+      result[this.getDateWithoutTime(gratitudes[0].createdAt)] = [gratitudes[0]]
 
-      for (let i = 1; i < danks.length; i++) {
-        let dateWithoutTime = this.getDateWithoutTime(danks[i].createdAt)
+      for (let i = 1; i < gratitudes.length; i++) {
+        let dateWithoutTime = this.getDateWithoutTime(gratitudes[i].createdAt)
         if (Object.keys(result).includes(dateWithoutTime)) {
-          result[dateWithoutTime].push(danks[i])
+          result[dateWithoutTime].push(gratitudes[i])
         } else {
-          result[dateWithoutTime] = [danks[i]]
+          result[dateWithoutTime] = [gratitudes[i]]
         }
       }
       return result
@@ -143,20 +143,12 @@ export default {
 }
 </script>
 <style scoped>
-/* antonio-regular - latin */
-@font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'Antonio';
-  font-style: normal;
-  font-weight: 400;
-  src: url('../../public/antonio-v19-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
 h2 {
   font-family: 'Antonio';
   padding: 1rem;
   text-align: center;
 }
-.danklist {
+.gratitudes-list {
   color: #4f65df;
   padding: 1rem;
   position: relative;
@@ -191,13 +183,13 @@ h2 {
 .section {
   position: relative;
 }
-.datum {
+.date {
   color: #81dee4;
   padding-left: 1rem;
   font-family: monospace;
 }
 
-.datum::before {
+.date::before {
   content: ' ';
   position: absolute;
   left: -0.5rem;

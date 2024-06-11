@@ -11,7 +11,7 @@
             placeholder="Ich freue mich auf..."
             :id="'ID_' + anticipation.id"
             ref="textarea"
-            @click="$router.push('/vorfreuden')"
+            @click="$router.push('/anticipations')"
           ></textarea>
         </label>
       </form>
