@@ -3,13 +3,13 @@
     <article class="anticipations">
       <h2 class="overview">Vorfreuden</h2>
       <section class="horizontal-list">
-        <div class="data-container" @mousedown="currentDate = getPreviousDay()">
+        <div class="data-container move-through-time" @mousedown="currentDate = getPreviousDay()">
           <p class="data">{{ '<' + getDateWithoutTime(getPreviousDay()) }}</p>
         </div>
         <div class="data-container">
           <p class="data" style="font-size: large">{{ getDateWithoutTime(currentDate) }}</p>
         </div>
-        <div class="data-container" @mousedown="currentDate = getFollowingDay()">
+        <div class="data-container move-through-time" @mousedown="currentDate = getFollowingDay()">
           <p class="data">{{ getDateWithoutTime(getFollowingDay()) + '>' }}</p>
         </div>
       </section>
@@ -143,6 +143,10 @@ export default {
   padding-right: 0.5rem;
   padding-top: 0.5rem;
   font-family: monospace;
+}
+
+.move-through-time:hover {
+  cursor: pointer;
 }
 
 .data::before {
