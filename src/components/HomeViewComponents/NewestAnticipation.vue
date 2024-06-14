@@ -22,7 +22,7 @@
         <label>
           <textarea
             placeholder="Heute freue ich mich auf..."
-            @click="$router.push('/vorfreuden')"
+            @click="$router.push('/anticipations')"
           ></textarea>
         </label>
       </form>
