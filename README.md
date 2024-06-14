@@ -2,7 +2,7 @@
 
 > This project was created in hackathon mode and under time constraints in a team of two. [Regina Müller](https://github.com/ReginaMueller) worked on both timeline features. I've worked on the homeview and on the features that let the user add new glimmers. I'm currently (since 11/06/2024) working to refactor everything to bring it up to my coding standards.
 
-A glimmer describes the opposite of a trigger: A glimmer is a moment in you life that evokes happiness, joy, calm, gratitude or a sense of connectedness.
+A glimmer describes the opposite of a trigger: A glimmer is a moment in your life that evokes happiness, joy, calm, gratitude or a sense of connectedness.
 
 
 ## Description
